@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/17 14:40:54 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:12:01 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ typedef enum s_bool
 	true
 }	t_bool;
 
+typedef struct s_data
+{
+  unsigned int philo_num;
+  unsigned int tdie;
+  unsigned int teat;
+  unsigned int tsleep;
+  unsigned int max_eat_times;
+  t_bool is_somephilo_died;
+  t_bool limited;
+  pthread_t *ths[];
+  pthread_mutex_t *forks[];
+} t_data;
 
+
+// init data
+t_data *ft_init_data(t_data *data, int ac, char **av);
+
+// on errors
+void *ft_on_error(char *err_msg);
 
 #endif
