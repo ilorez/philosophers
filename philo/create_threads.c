@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:41:46 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/18 11:37:15 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:04:37 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,36 @@ t_bool ft_philo_life_cycle(t_philo *p)
 {
   while (!p->data->limited || ++p->eats <= p->data->max_eats)
   {
-
-
+    //  get time now 
+    //  try to get forks
+    //  change status after get boths
+    //  check if there's a died philo 
+    //  in case of died
+    //  in case there's no died philo 
+    //  eat
+    //  put forks in the table
+    //  sleep
+    //  think
   }
   free(p->thr);
   free(p);
   return (true);
+}
+
+t_bool ft_philos_watcher(t_data *data, t_philo **philos)
+{
+  unsigned int id;
+
+  id = -1;
+  while (true && ++id)
+  {
+    id = data->philo_num % id;
+    // check status of philo
+    if ((philos[id])->status == waiting_forks)
+    
+
+
+  }
 }
 
 t_bool create_threads(t_data *data)
@@ -58,7 +82,8 @@ t_bool create_threads(t_data *data)
     if (pthread_create(&((philos[i])->thr), NULL, &ft_philo_life_cycle, philos[i]))
       return (false);
   }
-  // who to give a thread it's id
+  // ft_philo_watcher: 
+  //      - is a while function that watch threads status
   // joining threads
   // free threads
   while ()
