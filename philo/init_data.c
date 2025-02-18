@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:47:14 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/17 16:13:25 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/18 11:30:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ t_data *ft_init_data(t_data *data, int ac, char **av)
       || !_ft_get_num(av[2], &(data->tdie))
       || !_ft_get_num(av[3], &(data->teat))
       || !_ft_get_num(av[4], &(data->tsleep))
-      || (ac == 6 && !_ft_get_num(av[5], &(data->max_eat_times))))
+      || (ac == 6 && !_ft_get_num(av[5], &(data->max_eats))))
       return (ft_free_data_error(data, "Error: invalid argument\n"));
-  if (ac == 5)
+  if (ac == 6)
     data->limited = true;
   if (!_ft_create_forks(data))
     return (ft_free_data_error(data, NULL));

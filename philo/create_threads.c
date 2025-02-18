@@ -6,50 +6,61 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:41:46 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/17 17:29:05 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/18 11:37:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_bool ft_philo_life_cycle(t_data *data)
-{
-  while 
+//- the thread function let's call it ft_philo_life_cycle is also while function that do this:
+//  -  the loop goes from 0 to number of eat before stop. 
+//  - the first thing in the while is create another thread that should be detached after 
+//    return, and it's used for checking if this mother philo has died, it's just  check the 
+//    status of mother thread after usleep(time_to_die)
+//    if the status is waiting_forks that's mean it's  died
+//    so we set is_died true  && print die status and free memory and exit program
+//    in other case it's should just return              
+//  - after that we lock the both forks with order philo_id -1 , philo_id
+//  - after each fork lock immediately should test if philo already died
+//  - after each lock it's print state message that has take a fork
+//  - after take both forks, it's print state message eating and wait time of eat
+//  - after that it's immediately unlock forks
+//  - start sleeping by print message status and sleep() time of sleep
+//  - start thinking by print message status and sleep time of think
+//  - here end of loop
+//  - after loop the function return
 
+t_bool ft_philo_life_cycle(t_philo *p)
+{
+  while (!p->data->limited || ++p->eats <= p->data->max_eats)
+  {
+
+
+  }
+  free(p->thr);
+  free(p);
+  return (true);
 }
 
-typedef enum s_pstatus
-{
-  WAITING_FORKS,
-  EATING,
-  SLEEPING,
-  THINKING
-} t_pstatus;
-typedef struct s_philo 
-{
-  unsigned int id;
-  t_pstatus status;
-
-} t_philo;
 t_bool create_threads(t_data *data)
 {
-  pthread_t **ths;
+  t_philo **philos;
   unsigned int id;
   t_philo 
 
-  ths = ft_calloc(1, sizeof(pthread_t) * data->philo_num);
-  id = -1;
-  while (++(data->id) <= data->philo_num)
+  philos = ft_calloc(sizeof(t_philo*), data->philo_num);
+  i = -1;
+  while (++(i) <= data->philo_num)
   {
-
-    if (pthread_create(&(ths[data->id - 1]), NULL, &ft_philo_life_cycle, data))
+    philos[i] = ft_calloc(sizeof(t_philo), 1);
+    (philos[i])->id = i;
+    (philos[i])->data = data;
+    if (pthread_create(&((philos[i])->thr), NULL, &ft_philo_life_cycle, philos[i]))
       return (false);
   }
   // who to give a thread it's id
   // joining threads
+  // free threads
   while ()
 }
-
-
-
 
