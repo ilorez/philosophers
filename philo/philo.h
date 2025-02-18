@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/18 16:08:27 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:47:11 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef enum s_pstatus
   WAITING_FORKS = 0,
   EATING,
   SLEEPING,
-  THINKING
+  THINKING,
+  DONE
 } t_pstatus;
 
 typedef struct s_philo 
@@ -37,6 +38,7 @@ typedef struct s_philo
   pthread_t thr;
   t_pstatus status;
   unsigned int eats;
+  pthread_mutex_t ;
   t_data *data;
 } t_philo;
 
