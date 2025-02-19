@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/19 09:58:19 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:14:50 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ typedef struct s_data
   unsigned int teat;
   unsigned int tsleep;
   unsigned int max_eats;
-  t_bool is_somephilo_died;
+  unsigned int lfinish_count;
+  t_bool is_done;
   t_bool limited;
-  pthread_mutex_t *forks[];
-} t_data;
+  pthread_mutex_t lis_done;
+  pthread_mutex_t lfinish_count;
+  pthread_mutex_t *   [];
+} t_data;// init data
 
-// init data
 t_data *ft_init_data(t_data *data, int ac, char **av);
 
 // on errors
