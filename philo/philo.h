@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/18 19:47:11 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/19 09:58:19 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_philo
   pthread_t thr;
   t_pstatus status;
   unsigned int eats;
-  pthread_mutex_t ;
+  pthread_mutex_t teats;
   t_data *data;
 } t_philo;
 
