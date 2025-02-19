@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/19 14:14:50 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:59:29 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,19 @@ typedef enum s_pstatus
   EATING,
   SLEEPING,
   THINKING,
-  DONE
+  DONE,
+  DIE
 } t_pstatus;
 
-typedef struct s_philo 
+typedef struct s_philo
 {
   unsigned int id;
-  pthread_t thr;
-  t_pstatus status;
+  unsigned int start_time;
   unsigned int eats;
-  pthread_mutex_t teats;
+  t_pstatus status;
+  pthread_t thr;
+  pthread_mutex_t lstart_time;
+  pthread_mutex_t lstatus;
   t_data *data;
 } t_philo;
 
@@ -48,15 +51,17 @@ typedef struct s_data
   unsigned int tdie;
   unsigned int teat;
   unsigned int tsleep;
+  unsigned int the_start_time;
   unsigned int max_eats;
   unsigned int lfinish_count;
   t_bool is_done;
   t_bool limited;
   pthread_mutex_t lis_done;
   pthread_mutex_t lfinish_count;
-  pthread_mutex_t *   [];
-} t_data;// init data
+  pthread_mutex_t *forks[];
+} t_data;
 
+// init data
 t_data *ft_init_data(t_data *data, int ac, char **av);
 
 // on errors
