@@ -6,9 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:52:50 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/17 14:55:14 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:23:36 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 long long	_ft_max_as_signe(int signe)
 {

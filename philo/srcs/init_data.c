@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:47:14 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/20 16:27:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:28:32 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,20 @@ static t_bool _ft_get_num(char *str, unsigned int *num)
 * */
 t_data *ft_init_data(t_data *data, int ac, char **av)
 {
+
   data = ft_calloc(sizeof(data), 1);
   if (!data)
     return (ft_on_error("Error: could not allocate data\n"));
+
+  printf("hello here 1\n"); // TODO: remove me
   if (!_ft_get_num(av[1], &(data->philo_num)) 
       || !_ft_get_num(av[2], &(data->tdie))
       || !_ft_get_num(av[3], &(data->teat))
       || !_ft_get_num(av[4], &(data->tsleep))
       || (ac == 6 && !_ft_get_num(av[5], &(data->max_eats))))
       return (ft_free_data_error(data, "Error: invalid argument\n"));
+
+  printf("hello here 1\n"); // TODO: remove me
   if (ac == 6)
     data->limited = true;
   if (pthread_mutex_init(&(data->lis_done), NULL) != 0)
@@ -82,9 +87,10 @@ t_data *ft_init_data(t_data *data, int ac, char **av)
   if (!_ft_create_forks(data))
     return (ft_free_data_error(data, NULL));
   data->the_start_time = ft_time_now();
-  if (data->tdie - data->tsleep - data->teat < 0)
+  if (((long)data->tdie - (long)data->tsleep - (long)data->teat) < 0)
     data->tthink = 0;
   else 
     data->tthink = data->tdie - data->tsleep - data->teat;
+  printf("hello here 1\n"); // TODO: remove me
   return (data);
 }

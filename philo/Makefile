@@ -6,7 +6,7 @@
 #    By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 16:06:35 by znajdaou          #+#    #+#              #
-#    Updated: 2025/02/20 16:06:41 by znajdaou         ###   ########.fr        #
+#    Updated: 2025/02/20 19:30:27 by znajdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ vpath %.c	utils
 BUILD_DR = ./build/
 NAME =	philo 
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address #-g3 #
+FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address #-g3 #
 INCLUDES_DRS = -I./includes  
 CC = cc
 RM = rm -f
@@ -25,7 +25,7 @@ SRCS= philo.c init_data.c \
 			on_error.c create_threads.c \
 			philo_life_cycle.c \
 			print_msg_status.c utils.c \
-			watchr.c \
+			watcher.c \
 			ft_atol.c ft_isdigit.c ft_isspace.c \
 			ft_calloc.c ft_pututils.c
 

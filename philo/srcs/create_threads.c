@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:41:46 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/20 16:11:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:39:21 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ t_bool ft_create_threads(t_data *data)
 {
   t_philo **philos;
   void *tmp;
-  unsigned int id;
-  t_philo 
+  unsigned int i;
 
-  philos = ft_calloc(sizeof(t_philo*), data->philo_num);
+  printf("hello here 2\n"); // TODO: remove me
+  philos = (t_philo **)ft_calloc(sizeof(t_philo *), data->philo_num + 1);
   i = -1;
   while (++(i) < data->philo_num)
   {
     philos[i] = ft_calloc(sizeof(t_philo), 1);
-    (philos[i])->id = i;
+    (philos[i])->id = i+1;
     (philos[i])->data = data;
-    if (pthread_mutex_init((philos[i])->lstatus, NULL) != 0)
-      return ft_usefree(data, philos, "Error: pthread_mutex_init\n");
-    if (pthread_mutex_init((philos[i])->lstart_time, NULL) != 0)
-      return ft_usefree(data, philos, "Error: pthread_mutex_init\n");
+    if (pthread_mutex_init(&((philos[i])->lstatus), NULL) != 0)
+      return (t_bool)ft_usefree(data, philos, "Error: pthread_mutex_init\n");
+    if (pthread_mutex_init(&((philos[i])->lstart_time), NULL) != 0)
+      return (t_bool)ft_usefree(data, philos, "Error: pthread_mutex_init\n");
     if (pthread_create(&((philos[i])->thr), NULL, &ft_philo_life_cycle, philos[i]))
     {
-      pthread_mutex_lock(data->lis_done);
+      pthread_mutex_lock(&(data->lis_done));
       data->is_done = true;
-      pthread_mutex_unlock(data->lis_done);
+      pthread_mutex_unlock(&(data->lis_done));
       break;
     }
   }
@@ -46,5 +46,7 @@ t_bool ft_create_threads(t_data *data)
       ft_usefree(data, philos, "Error: pthread join\n");
   // free threads
   ft_usefree(data, philos, NULL);
+  printf("hello here 2\n"); // TODO: remove me
+  return (true);
 }
 

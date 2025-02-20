@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/20 16:19:14 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:14:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h> 
+#include <sys/time.h>
 
 // t_bool type
 typedef enum s_bool
@@ -41,12 +42,13 @@ typedef enum s_pstatus
 typedef struct s_data
 {
   unsigned int philo_num;
+  unsigned int max_eats;
+  unsigned int finish_count;
   unsigned int tdie;
   unsigned int teat;
   unsigned int tsleep;
-  unsigned int the_start_time;
-  unsigned int max_eats;
-  unsigned int finish_count;
+  unsigned int tthink;
+  time_t the_start_time;
   t_bool is_done;
   t_bool limited;
   pthread_mutex_t lis_done;
@@ -57,8 +59,8 @@ typedef struct s_data
 typedef struct s_philo
 {
   unsigned int id;
-  unsigned int start_time;
   unsigned int eats;
+  time_t start_time;
   t_pstatus status;
   pthread_t thr;
   pthread_mutex_t lstart_time;
@@ -80,13 +82,13 @@ void *ft_usefree(t_data *data, t_philo **philos, char *msg);
 t_bool ft_create_threads(t_data *data);
 
 // philo life cycle
-void *ft_philo_life_cycle(t_philo *p);
-void ft_change_time(unsigned int *var, pthread_mutex_t lock);
+void *ft_philo_life_cycle(void *ptr);
+void ft_change_time(time_t *var, pthread_mutex_t lock);
 void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
 
 // utils
-void ft_print_msg_status(t_philo *philo);
 void ft_free_lst(void **lst);
+time_t ft_time_now();
 
 // watcher
 t_bool ft_watcher(t_data *data, t_philo **philos);
@@ -98,5 +100,8 @@ int	ft_isdigit(int c);
 int	ft_isspace(int c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
+
+// print msg status
+void ft_print_msg_status(t_philo *philo);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:05:34 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/16 18:07:39 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:23:50 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.c"
+#include "philo.h"
 
 void	ft_bzero(void *s, size_t n)
 {
