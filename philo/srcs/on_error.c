@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:29:28 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/20 18:48:07 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:12:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ void *ft_free_data_error(t_data *data, char *err_msg)
   if (!data)
     return (NULL);
   if (data->forks)
-    ft_free_lst((void **)(data->forks));
+    free(data->forks);
   free(data);
   if (err_msg)
     ft_putstr_fd(err_msg, STDERR_FILENO);
   return (NULL);
 }
 
-void *ft_usefree(t_data *data, t_philo **philos, char *msg)
+void *ft_usefree(t_data *data, t_philo *philos, char *msg)
 {
   if (philos)
-    ft_free_lst((void **)(philos));
+    free(philos);
   if (data)
     ft_free_data_error(data, msg);
   return (NULL);
