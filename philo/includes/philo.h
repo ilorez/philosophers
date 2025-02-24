@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/21 16:19:24 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:13:32 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_data
   t_bool limited;
   pthread_mutex_t lis_done;
   pthread_mutex_t lfinish_count;
-  pthread_mutex_t *forks;
+  pthread_mutex_t **forks;
 } t_data;
 
 typedef struct s_philo
@@ -76,7 +76,7 @@ t_data *ft_init_data(t_data *data, int ac, char **av);
 void *ft_on_error(char *err_msg);
 int ft_print_syntax_error(char *program);
 void *ft_free_data_error(t_data *data, char *err_msg);
-void *ft_usefree(t_data *data, t_philo *philos, char *msg);
+void *ft_usefree(t_data *data, t_philo **philos, char *msg);
 
 // create threads
 t_bool ft_create_threads(t_data *data);
@@ -91,7 +91,7 @@ void ft_free_lst(void **lst);
 time_t ft_time_now();
 
 // watcher
-t_bool ft_watcher(t_data *data, t_philo *philos);
+t_bool ft_watcher(t_data *data, t_philo **philos);
 
 // utils folder
 long long	ft_atol(const char *nptr);

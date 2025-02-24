@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:58:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/21 16:23:06 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:17:03 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void *ft_philo_life_cycle(void *ptr)
   ft_change_time(&(p->start_time), &(p->lstart_time));
   while (!p->data->limited || ++p->eats <= p->data->max_eats)
   {
-    pthread_mutex_lock(&((p->data->forks)[p->id - 1]));
+    pthread_mutex_lock(((p->data->forks)[p->id - 1]));
     ft_print_msg_status(p);
-    pthread_mutex_lock(&((p->data->forks)[p->data->philo_num % p->id]));
+    pthread_mutex_lock(((p->data->forks)[p->data->philo_num % p->id]));
     ft_print_msg_status(p);
 
     printf("id is ->%u\n", p->id);
@@ -32,8 +32,8 @@ void *ft_philo_life_cycle(void *ptr)
     ft_change_status(p->data, p, EATING);
     //printf("changed\n");
     usleep(p->data->teat);
-    pthread_mutex_unlock(&((p->data->forks)[p->id % p->data->philo_num]));
-    pthread_mutex_unlock(&((p->data->forks)[p->id -1]));
+    pthread_mutex_unlock(((p->data->forks)[p->id % p->data->philo_num]));
+    pthread_mutex_unlock(((p->data->forks)[p->id -1]));
     ft_change_time(&(p->start_time), &(p->lstart_time));
     ft_change_status(p->data, p, SLEEPING);
     usleep(p->data->tsleep);
