@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_errno.h"
 #include "philo.h"
+#include "t_errno.h"
 
 static void	_ft_create_err_list(t_errno_msg lst[ERR_COUNT])
 {
@@ -23,9 +23,12 @@ static void	_ft_create_err_list(t_errno_msg lst[ERR_COUNT])
 	err_msgs[ERR_EMPTY_ARG] = (t_errno_msg){ERR_EMPTY_ARG, "Empty argumnet\n"};
 	err_msgs[ERR_MALLOC_FAIL] = (t_errno_msg){ERR_MALLOC_FAIL,
 		"an allocation failed\n"};
-	err_msgs[ERR_MUTEX_INIT] = (t_errno_msg){ERR_MUTEX_INIT, "mutex init field\n"};
-	err_msgs[ERR_ARG_RANGE_INT] = (t_errno_msg){ERR_ARG_RANGE_INT, "invalid argument out of range int\n"};
-	err_msgs[ERR_ARG_RANGE] = (t_errno_msg){ERR_ARG_RANGE, "invalid argument out of range\n"};
+	err_msgs[ERR_MUTEX_INIT] = (t_errno_msg){ERR_MUTEX_INIT,
+		"mutex init field\n"};
+	err_msgs[ERR_ARG_RANGE_INT] = (t_errno_msg){ERR_ARG_RANGE_INT,
+		"invalid argument out of range int\n"};
+	err_msgs[ERR_ARG_RANGE] = (t_errno_msg){ERR_ARG_RANGE,
+		"invalid argument out of range\n"};
 	err_msgs[ERR_UNKNOWN] = (t_errno_msg){ERR_UNKNOWN,
 		"Unknown error occurred\n"};
 	ft_memcpy(lst, err_msgs, sizeof(t_errno_msg) * ERR_COUNT);

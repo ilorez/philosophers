@@ -12,27 +12,25 @@
 
 #include "philo.h"
 
-void ft_free_lst(void **lst)
+void	ft_free_lst(void **lst)
 {
-  void **org;
+	void	**org;
 
-  if (!lst)
-         return ;
-  org = lst;
-  while (*lst)
-    free(*lst++);
-  free(org);
-  return ;
+	if (!lst)
+		return ;
+	org = lst;
+	while (*lst)
+		free(*lst++);
+	free(org);
+	return ;
 }
 
-time_t ft_time_now()
+time_t	ft_time_now(void)
 {
-  time_t mills;
-  struct timeval tv;
+	time_t			mills;
+	struct timeval	tv;
 
-  gettimeofday(&tv, NULL); 
-  mills = (time_t)tv.tv_sec * 1000 + (time_t)tv.tv_usec / 1000;
-  return mills;
+	gettimeofday(&tv, NULL);
+	mills = (time_t)tv.tv_sec * 1000 + (time_t)tv.tv_usec / 1000;
+	return (mills);
 }
-
-

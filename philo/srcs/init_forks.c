@@ -12,18 +12,18 @@
 
 #include "philo.h"
 
-t_errno ft_init_forks(t_data *data)
+t_errno	ft_init_forks(t_data *data)
 {
-  int i;
-  pthread_mutex_t *forks;
+	int				i;
+	pthread_mutex_t	*forks;
 
-  i = -1;
-  forks = ft_calloc(sizeof(pthread_mutex_t), data->philo_num);
-  if (!forks)
-    return (ERR_MALLOC_FAIL);
-  while (++i < data->philo_num)
-    if (pthread_mutex_init(forks++, NULL) != 0)
-      return (ERR_MUTEX_INIT);
-  data->forks = forks;
-  return (ERR_SUCCESS);
+	i = -1;
+	forks = ft_calloc(sizeof(pthread_mutex_t), data->philo_num);
+	if (!forks)
+		return (ERR_MALLOC_FAIL);
+	while (++i < data->philo_num)
+		if (pthread_mutex_init(forks++, NULL) != 0)
+			return (ERR_MUTEX_INIT);
+	data->forks = forks;
+	return (ERR_SUCCESS);
 }
