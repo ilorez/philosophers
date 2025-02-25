@@ -5,59 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 17:47:14 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/24 18:38:01 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/02/25 10:47:51 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-pthread_mutex_t **ft_create_forks2(unsigned int num)
-{
-  unsigned int i;
-  pthread_mutex_t **forks;
+static int ft_parsing_params(t_data *data, int ac, char **av);
+static t_bool	ft_is_valid(char *str);
+static t_errno ft_get_size_t(char *str, size_t *num, t_errno *err);
+static t_errno ft_get_int(char *str, int *num, t_errno *err);
 
-  i = 0;
-  forks = ft_calloc(sizeof(pthread_mutex_t *), (num + 1));
-  if (!forks)
-    return (ft_on_error("Error: forks allocation field\n"), NULL);
-  while (i < num)
+t_errno ft_init_data(t_data *data, int ac, char **av)
+{
+  data->err = ft_parsing_params(data, ac, av);
+  if (data->err)
+    return (data->err);
+  if (pthread_mutex_init(&(data->lis_done), NULL) != 0
+      || pthread_mutex_init(&(data->lfinish_count), NULL) != 0)
   {
-    forks[i] = ft_calloc(sizeof(pthread_mutex_t), 1); 
-
-    printf("%d\n", i);
-
-    if (forks[i] == NULL)
-      return (ft_on_error("Error: fork allocation field\n"), NULL);
-    if (pthread_mutex_init(forks[i], NULL) != 0)
-      return (ft_on_error("Error: pthread mutex init\n"), NULL);
-    i++;
+      data->err = ERR_MUTEX_INIT;
+      return (data->err);
   }
-  return (forks);
+  data->err = ft_init_forks(data);
+  if (data->err)
+    return (data->err);
+  data->start_time = ft_time_now();
+  if (data->tdie > data->tsleep + data->teat)
+    data->tthink = data->tdie - data->tsleep - data->teat;
+  return (ERR_SUCCESS);
 }
 
-static t_bool _ft_create_forks(t_data *data)
+static int ft_parsing_params(t_data *d, int ac, char **av)
 {
- // unsigned int i;
-  data->forks = ft_create_forks2(data->philo_num);
-
- // i = -1;
- // data->forks = (pthread_mutex_t **)ft_calloc(sizeof(pthread_mutex_t *), (data->philo_num + 1));
- // if (!(data->forks))
- //   return (ft_on_error("Error: forks allocation field\n"), false);
- // while (++i < data->philo_num)
- // {
- //   ((data->forks)[i]) = ft_calloc(sizeof(pthread_mutex_t), 1); 
- //   printf("%d\n", i);
- //   if (((data->forks)[i]) == NULL)
- //     return (ft_on_error("Error: fork allocation field\n"), false);
- //   if (pthread_mutex_init(((data->forks)[i]), NULL) != 0)
- //     return (ft_on_error("Error: pthread mutex init\n"), false);
- // }
-  return (true);
+  if (ac == 6)
+  {
+    ft_get_int(av[5], &(d->max_eats), &(d->err));
+    d->limited = true;
+  }
+  ft_get_size_t(av[4], &(d->tsleep), &(d->err));
+  ft_get_size_t(av[3], &(d->teat), &(d->err));
+  ft_get_size_t(av[2], &(d->tdie), &(d->err));
+  ft_get_int(av[1], &(d->philo_num), &(d->err));
+  if (d->err)
+    return (d->err);
+  return (0);
 }
 
-static t_bool	_ft_is_valid(char *str)
+static t_bool	ft_is_valid(char *str)
 {
 	if (*str == '+' || *str == '-')
 		str++;
@@ -72,50 +68,41 @@ static t_bool	_ft_is_valid(char *str)
 	return (true);
 }
 
-static t_bool _ft_get_num(char *str, unsigned int *num)
+static t_errno ft_get_int(char *str, int *num, t_errno *err)
 {
   long long re;
 
-  if (!_ft_is_valid(str))
-    return (false);
+  if (!ft_is_valid(str))
+  {
+    *err = ERR_INVALID_ARG;
+    return (*err);
+  }
   re = ft_atol(str);
   if (re <= 0 || re > INT_MAX)
-    return (false);
-  *num = (unsigned int) re;
-  return true;
+  {
+    *err = ERR_ARG_RANGE_INT;
+    return (*err);
+  }
+  *num = (int) re;
+  return (ERR_SUCCESS);
 }
 
-/* this function for init data by get argmunet info 
-* and also it's create forks array using mutex_init for each fork 
-* */
-t_data *ft_init_data(t_data *data, int ac, char **av)
+static t_errno ft_get_size_t(char *str, size_t *num, t_errno *err)
 {
+  long long re;
 
-  data = ft_calloc(sizeof(t_data), 1);
-  if (!data)
-    return (ft_on_error("Error: could not allocate data\n"));
-  if (!_ft_get_num(av[1], &(data->philo_num)) 
-      || !_ft_get_num(av[2], &(data->tdie))
-      || !_ft_get_num(av[3], &(data->teat))
-      || !_ft_get_num(av[4], &(data->tsleep))
-      || (ac == 6 && !_ft_get_num(av[5], &(data->max_eats))))
-      return (ft_free_data_error(data, "Error: invalid argument\n"));
-
-  if (ac == 6)
-    data->limited = true;
-  if (pthread_mutex_init(&(data->lis_done), NULL) != 0)
-      return (ft_on_error("Error: pthread mutex init\n"));
-  if (pthread_mutex_init(&(data->lfinish_count), NULL) != 0)
-      return (ft_on_error("Error: pthread mutex init\n"));
-  if (false)
+  if (!ft_is_valid(str))
   {
-    _ft_create_forks(data);
-    return (ft_free_data_error(data, NULL));
+    *err = ERR_INVALID_ARG;
+    return (*err);
   }
-  data->the_start_time = ft_time_now();
-  if ((int)(data->tdie - data->tsleep - data->teat) < 0)
-    data->tthink = 0;
-  else 
-    data->tthink = data->tdie - data->tsleep - data->teat;
-  return (data);
+  re = ft_atol(str);
+  if (re <= 0 || re > MAX_ARG_RANGE)
+  {
+    *err = ERR_ARG_RANGE;
+    return (*err);
+  }
+
+  *num = (size_t) re;
+  return (ERR_SUCCESS);
 }

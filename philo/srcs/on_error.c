@@ -6,44 +6,40 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:29:28 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/24 17:09:24 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:35:11 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void *ft_on_error(char *err_msg)
-{
-  ft_putstr_fd(err_msg, STDERR_FILENO);
-  return (NULL);
-}
-
-void *ft_free_data_error(t_data *data, char *err_msg)
+t_errno ft_free_data(t_data *data, t_errno err)
 {
   if (!data)
-    return (NULL);
+    return (err);
   if (data->forks)
-    ft_free_lst((void **)data->forks);
+    free(data->forks);
   free(data);
-  if (err_msg)
-    ft_putstr_fd(err_msg, STDERR_FILENO);
-  return (NULL);
+  if (err)
+    ft_perror(NULL, err);
+  return (err);
 }
 
-void *ft_usefree(t_data *data, t_philo **philos, char *msg)
+void *ft_usefree(t_data *data, t_philo **philos, t_errno err)
 {
   if (philos)
     ft_free_lst((void **)philos);
   if (data)
-    ft_free_data_error(data, msg);
+    ft_free_data(data, err);
   return (NULL);
 }
 
 int ft_print_syntax_error(char *program)
 {
   printf("./%s <*number_of_philosophers> <*time_to_die> \
-          <*time_to_eat> <time_to_sleep> \
-          [number_of_times_each_philosopher_must_eat] \
-          ", program);
+          \n\t<*time_to_eat> <time_to_sleep> \
+          \n\t[number_of_times_each_philosopher_must_eat] \
+          \n", program);
   return (EXIT_FAILURE);
 }
+
+

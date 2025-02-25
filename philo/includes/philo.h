@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/24 17:13:32 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:51:08 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 #include <unistd.h>
 #include <limits.h> 
 #include <sys/time.h>
+#include <stdint.h>
+#include "t_errno.h"
 
+#define MAX_ARG_RANGE 2147483649 
+// it's should always be between ]0, long long[  NOTE: o and long long not included
 // t_bool type
 typedef enum s_bool
 {
@@ -41,19 +45,20 @@ typedef enum s_pstatus
 
 typedef struct s_data
 {
-  unsigned int philo_num;
-  unsigned int max_eats;
-  unsigned int finish_count;
-  unsigned int tdie;
-  unsigned int teat;
-  unsigned int tsleep;
-  unsigned int tthink;
-  time_t the_start_time;
+  int philo_num;
+  int max_eats;
+  int finish_count;
+  size_t tdie;
+  size_t teat;
+  size_t tsleep;
+  size_t tthink;
+  time_t start_time;
   t_bool is_done;
   t_bool limited;
+  t_errno err;
   pthread_mutex_t lis_done;
   pthread_mutex_t lfinish_count;
-  pthread_mutex_t **forks;
+  pthread_mutex_t *forks;
 } t_data;
 
 typedef struct s_philo
@@ -70,32 +75,36 @@ typedef struct s_philo
 
 // functions
 // init data
-t_data *ft_init_data(t_data *data, int ac, char **av);
+t_errno ft_init_data(t_data *data, int ac, char **av);
+// init forks
+t_errno ft_init_forks(t_data *data);
 
 // on errors
-void *ft_on_error(char *err_msg);
+//void *ft_on_error(char *err_msg);
 int ft_print_syntax_error(char *program);
-void *ft_free_data_error(t_data *data, char *err_msg);
-void *ft_usefree(t_data *data, t_philo **philos, char *msg);
+t_errno ft_free_data(t_data *data, t_errno err);
+// void *ft_usefree(t_data *data, t_philo **philos, t_errno msg);
 
 // create threads
-t_bool ft_create_threads(t_data *data);
+//t_bool ft_create_threads(t_data *data);
 
 // philo life cycle
-void *ft_philo_life_cycle(void *ptr);
-void ft_change_time(time_t *var, pthread_mutex_t *lock);
-void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
+//void *ft_philo_life_cycle(void *ptr);
+//void ft_change_time(time_t *var, pthread_mutex_t *lock);
+//void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
 
 // utils
 void ft_free_lst(void **lst);
 time_t ft_time_now();
 
 // watcher
-t_bool ft_watcher(t_data *data, t_philo **philos);
+//t_bool ft_watcher(t_data *data, t_philo **philos);
 
 // utils folder
 long long	ft_atol(const char *nptr);
 void	*ft_calloc(size_t count, size_t size);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	*ft_memset(void *b, int c, size_t len);
 int	ft_isdigit(int c);
 int	ft_isspace(int c);
 void	ft_putchar_fd(char c, int fd);

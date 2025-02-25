@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:32:40 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/24 18:31:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:31:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void print_t_data(const t_data *data)
     printf("  philo_num: %u\n", data->philo_num);
     printf("  max_eats: %u\n", data->max_eats);
     printf("  finish_count: %u\n", data->finish_count);
-    printf("  tdie: %u\n", data->tdie);
-    printf("  teat: %u\n", data->teat);
-    printf("  tsleep: %u\n", data->tsleep);
-    printf("  tthink: %u\n", data->tthink);
-    printf("  the_start_time: %ld\n", data->the_start_time);
+    printf("  tdie: %lu\n", data->tdie);
+    printf("  teat: %lu\n", data->teat);
+    printf("  tsleep: %lu\n", data->tsleep);
+    printf("  tthink: %lu\n", data->tthink);
+    printf("  the_start_time: %ld\n", data->start_time);
     printf("  is_done: %s\n", data->is_done ? "true" : "false");
     printf("  limited: %s\n", data->limited ? "true" : "false");
     
@@ -39,9 +39,9 @@ void print_t_data(const t_data *data)
     if (data->forks)
     {
         int i = 0;
-        while ((data->forks)[i] != NULL)
+        while (i < data->philo_num)
         {
-            printf("    forks[%d]: %p\n", i, (void*)(data->forks)[i]);
+            printf("    forks[%d]: %p\n", i, (void*)&(data->forks)[i]);
             i++;
         }
         printf("    forks[%d]: NULL\n", i);
@@ -58,14 +58,14 @@ int main(int ac, char **av)
 
   if (ac != 5 && ac != 6 )
     return (ft_print_syntax_error(av[0])); // TODO:[X]: is it DONE
-  data = NULL;
-  data = ft_init_data(data, ac, av); // TODO:[ ]: is it DONE
+  data = ft_calloc(sizeof(t_data), 1);
   if (!data)
-    return (EXIT_FAILURE);
-  // print data test // TODO: REMOVE ME
+    return (ft_perror(NULL, ERR_MALLOC_FAIL), ERR_MALLOC_FAIL); //TODO:
+  if (ft_init_data(data, ac, av) != 0) // TODO:[ ]: is it DONE
+    return (ft_free_data(data, data->err)); // TODO:
   print_t_data(data);
-  return (0);
-  if (!ft_create_threads(data)) // TODO:[ ]: is it DONE
-    return (EXIT_FAILURE);
+  //if (!ft_create_threads(data)) // TODO:[ ]: is it DONE
+  //  return (EXIT_FAILURE);
   return (EXIT_SUCCESS);
 }
+
