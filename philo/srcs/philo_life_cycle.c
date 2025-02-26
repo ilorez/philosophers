@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:58:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:43:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:30:16 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 void	*ft_philo_life_cycle(void *ptr)
 {
-	t_philo	*p;
-
-	p = (t_philo *)ptr;
-	printf("id is ->%u\n", p->id);
-	// p->start_time = ft_time_now();
-	ft_change_time(&(p->start_time), &(p->lstart_time));
-	while (!p->data->limited || ++p->eats <= p->data->max_eats)
+	while (!(p->data->limited) || ++(p->eats) <= p->data->max_eats)
 	{
-		pthread_mutex_lock(((p->data->forks)[p->id - 1]));
+		pthread_mutex_lock(p->data->forks[p->id - 1]);
 		ft_print_msg_status(p);
-		pthread_mutex_lock(((p->data->forks)[p->data->philo_num % p->id]));
+		pthread_mutex_lock(p->data->forks[p->data->philo_num % p->id]);
 		ft_print_msg_status(p);
 		printf("id is ->%u\n", p->id);
 		// printf("change status\n");
@@ -51,12 +45,7 @@ void	*ft_philo_life_cycle(void *ptr)
 	return (NULL);
 }
 
-void	ft_change_time(time_t *var, pthread_mutex_t *lock)
-{
-	pthread_mutex_lock(lock);
-	*var = ft_time_now();
-	pthread_mutex_unlock(lock);
-}
+
 
 void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
 {

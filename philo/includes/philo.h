@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:59:16 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:59:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 #define MAX_ARG_RANGE 2147483649 
 // it's should always be between ]0, long long[  NOTE: o and long long not included
+// max: 9223372036854775806
 // t_bool type
 typedef enum s_bool
 {
@@ -48,10 +49,10 @@ typedef struct s_data
   int philo_num;
   int max_eats;
   int finish_count;
-  size_t tdie;
-  size_t teat;
-  size_t tsleep;
-  size_t tthink;
+  time_t tdie;
+  time_t teat;
+  time_t tsleep;
+  time_t tthink;
   time_t start_time;
   t_bool is_done;
   t_bool limited;
@@ -98,9 +99,10 @@ t_errno ft_threads_creature(t_data *data);
 // utils
 void ft_free_lst(void **lst);
 time_t ft_time_now();
+void	ft_change_time(time_t *var, pthread_mutex_t *lock);
 
 // watcher
-//t_bool ft_watcher(t_data *data, t_philo **philos);
+t_errno ft_watcher(t_data *data, t_philo **philos);
 
 // utils folder
 long long	ft_atol(const char *nptr);

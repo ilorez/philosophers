@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:47:51 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:00:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		ft_parsing_params(t_data *data, int ac, char **av);
 static t_bool	ft_is_valid(char *str);
-static t_errno	ft_get_size_t(char *str, size_t *num, t_errno *err);
+static t_errno	ft_get_time_t(char *str, time_t *num, t_errno *err);
 static t_errno	ft_get_int(char *str, int *num, t_errno *err);
 
 t_errno	ft_init_data(t_data *data, int ac, char **av)
@@ -44,9 +44,9 @@ static int	ft_parsing_params(t_data *d, int ac, char **av)
 		ft_get_int(av[5], &(d->max_eats), &(d->err));
 		d->limited = true;
 	}
-	ft_get_size_t(av[4], &(d->tsleep), &(d->err));
-	ft_get_size_t(av[3], &(d->teat), &(d->err));
-	ft_get_size_t(av[2], &(d->tdie), &(d->err));
+	ft_get_time_t(av[4], &(d->tsleep), &(d->err));
+	ft_get_time_t(av[3], &(d->teat), &(d->err));
+	ft_get_time_t(av[2], &(d->tdie), &(d->err));
 	ft_get_int(av[1], &(d->philo_num), &(d->err));
 	if (d->err)
 		return (d->err);
@@ -87,7 +87,7 @@ static t_errno	ft_get_int(char *str, int *num, t_errno *err)
 	return (ERR_SUCCESS);
 }
 
-static t_errno	ft_get_size_t(char *str, size_t *num, t_errno *err)
+static t_errno	ft_get_time_t(char *str, time_t *num, t_errno *err)
 {
 	long long	re;
 
@@ -102,6 +102,6 @@ static t_errno	ft_get_size_t(char *str, size_t *num, t_errno *err)
 		*err = ERR_ARG_RANGE;
 		return (*err);
 	}
-	*num = (size_t)re;
+	*num = (time_t)re;
 	return (ERR_SUCCESS);
 }
