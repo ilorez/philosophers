@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 10:59:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:17:56 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_data
 typedef struct s_philo
 {
   unsigned int id;
-  unsigned int eats;
+  int eats;
   time_t start_time;
   t_pstatus status;
   pthread_t thr;
@@ -92,9 +92,8 @@ t_errno ft_threads_creature(t_data *data);
 //t_bool ft_create_threads(t_data *data);
 
 // philo life cycle
-//void *ft_philo_life_cycle(void *ptr);
-//void ft_change_time(time_t *var, pthread_mutex_t *lock);
-//void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
+void	*ft_philo_life_cycle(void *ptr);
+void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
 
 // utils
 void ft_free_lst(void **lst);

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:21:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:09:31 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:46:33 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_print_msg_status(t_philo *philo)
 {
 	char	*status[STATUS_COUNT];
 
+  //printf("i'm here 2\n");
 	if (philo->status < 0 || philo->status >= STATUS_COUNT
 		|| philo->status == DONE)
 		return ;

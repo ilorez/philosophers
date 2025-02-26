@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:18:31 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 10:34:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:12:54 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_errno	ft_watcher(t_data *data, t_philo **philos)
 	printf("watcher: i'm here for you domies for got any died trash\n");
 	pthread_mutex_lock(&(data->lis_done));
 	if (data->is_done)
+  {
+	  pthread_mutex_unlock(&(data->lis_done));
 		return (ERR_UNKNOWN);
+  }
 	pthread_mutex_unlock(&(data->lis_done));
 	id = 0;
 	while (true)
@@ -43,7 +46,7 @@ t_errno	ft_watcher(t_data *data, t_philo **philos)
 			id++;
 			continue ;
 		}
-		pthread_mutex_lock(&((philos[id])->lstatus));
+		//pthread_mutex_lock(&((philos[id])->lstatus));
 		pthread_mutex_lock(&((philos[id])->lstart_time));
 		if (((ft_time_now() - (philos[id])->start_time) > data->tdie) && (philos[id]->status != EATING))
 		{

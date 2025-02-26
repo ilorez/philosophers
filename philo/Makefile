@@ -6,7 +6,7 @@
 #    By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 16:06:35 by znajdaou          #+#    #+#              #
-#    Updated: 2025/02/26 10:30:43 by znajdaou         ###   ########.fr        #
+#    Updated: 2025/02/26 11:40:14 by znajdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ vpath %.c	utils
 BUILD_DR = ./build/
 NAME =	philo 
 
-FLAGS = -Wall -Wextra -Werror -pthread -g3 #-fsanitize=address #-g3 #
+FLAGS = -Wall -Wextra -Werror # -pthread -g3 #-fsanitize=address #-g3 #
 INCLUDES_DRS = -I./includes  
 CC = cc
 RM = rm -f
@@ -27,10 +27,8 @@ SRCS= philo.c init_data.c init_forks.c\
 			ft_calloc.c ft_pututils.c \
 			print_msg_status.c utils.c ft_memcpy.c \
 			ft_errno.c \
-			threads_creature.c watcher.c 
-
-# create_threads.c 
-# philo_life_cycle.c 
+			threads_creature.c watcher.c \
+			philo_life_cycle.c 
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 green = \033[32m
