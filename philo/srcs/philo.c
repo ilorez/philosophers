@@ -6,12 +6,28 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:32:40 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:58:07 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:34:51 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	main(int ac, char **av)
+{
+	t_data	*data;
+
+	if (ac != 5 && ac != 6)
+		return (ft_print_syntax_error(av[0]));
+	data = ft_calloc(sizeof(t_data), 1);
+	if (!data)
+		return (ft_perror(NULL, ERR_MALLOC_FAIL), ERR_MALLOC_FAIL);
+  if (ft_init_data(data, ac, av) != 0)
+    return (ft_free_data(data, data->err));
+	data->err = ft_threads_creature(data); // TODO:[ ]: is it DONE
+	return (ft_free_data(data, data->err));
+}
+
+/*
 void	print_t_data(const t_data *data)
 {
 	int	i;
@@ -50,20 +66,4 @@ void	print_t_data(const t_data *data)
 	{
 		printf("    forks: NULL\n");
 	}
-}
-
-int	main(int ac, char **av)
-{
-	t_data	*data;
-
-	if (ac != 5 && ac != 6)
-		return (ft_print_syntax_error(av[0])); // TODO:[X]: is it DONE
-	data = ft_calloc(sizeof(t_data), 1);
-	if (!data)
-		return (ft_perror(NULL, ERR_MALLOC_FAIL), ERR_MALLOC_FAIL); // TODO:
-	if (ft_init_data(data, ac, av) != 0)                          // TODO:[ ]: is it DONE
-		return (ft_free_data(data, data->err));                     // TODO:
-	print_t_data(data);
-	data->err = ft_threads_creature(data); // TODO:[ ]: is it DONE
-	return (ft_free_data(data, data->err));
-}
+}*/

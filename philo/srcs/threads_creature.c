@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:24:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 11:18:48 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:39:30 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_errno ft_threads_creature(t_data *data)
 {
   t_philo			**philos;
+  void *tmp;
 	int	i;
 
 	philos = (t_philo **)ft_calloc(sizeof(t_philo *), data->philo_num + 1);
@@ -38,5 +39,9 @@ t_errno ft_threads_creature(t_data *data)
 		}
 	}
 	ft_watcher(data, philos);
+	i = -1;
+	while (++i < data->philo_num)
+		if (pthread_join(philos[i]->thr, &tmp) != 0)
+			return (ft_free_philos(philos, ERR_PTHREAD_JOIN));
   return (ERR_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:52:20 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:32:00 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum s_errno
   ERR_ARG_RANGE,
   ERR_ARG_RANGE_INT,
   ERR_MUTEX_INIT,
+  ERR_PTHREAD_JOIN,
 	ERR_UNKNOWN,
 	ERR_COUNT
 }			t_errno;

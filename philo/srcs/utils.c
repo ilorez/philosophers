@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 11:46:54 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:53:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_free_lst(void **lst)
 	return ;
 }
 
-time_t	ft_time_now(void)
+time_t	ft_time_now()
 {
 	time_t			mills;
 	struct timeval	tv;
@@ -44,20 +44,16 @@ void	ft_change_time(time_t *var, pthread_mutex_t *lock)
 
 void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
 {
-	//printf("try to lock status in change status\n");
 	pthread_mutex_lock(&(philo->lstatus));
 	philo->status = to;
 	pthread_mutex_unlock(&(philo->lstatus));
-	//printf("unlocked status in change status\n");
-	// printf("try to lock lis_done in change status\n");
 	pthread_mutex_lock(&(data->lis_done));
 	if (!(data->is_done))
 	{
-		pthread_mutex_unlock(&(data->lis_done));
-    //printf("i'm here 1\n");
+	  pthread_mutex_unlock(&(data->lis_done));
 		ft_print_msg_status(philo);
 	}
-	pthread_mutex_unlock(&(data->lis_done));
-	// printf("unlocked is_done in change status\n");
+  else 
+	  pthread_mutex_unlock(&(data->lis_done));
 	return ;
 }

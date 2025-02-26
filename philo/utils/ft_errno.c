@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:52:48 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:32:05 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	_ft_create_err_list(t_errno_msg lst[ERR_COUNT])
 		"an allocation failed\n"};
 	err_msgs[ERR_MUTEX_INIT] = (t_errno_msg){ERR_MUTEX_INIT,
 		"mutex init field\n"};
+	err_msgs[ERR_PTHREAD_JOIN] = (t_errno_msg){ERR_PTHREAD_JOIN,
+		"pthread join field\n"};
 	err_msgs[ERR_ARG_RANGE_INT] = (t_errno_msg){ERR_ARG_RANGE_INT,
 		"invalid argument out of range int\n"};
 	err_msgs[ERR_ARG_RANGE] = (t_errno_msg){ERR_ARG_RANGE,

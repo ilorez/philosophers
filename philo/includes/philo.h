@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 11:17:56 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:32:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
   time_t tsleep;
   time_t tthink;
   time_t start_time;
-  t_bool is_done;
+  int is_done;
   t_bool limited;
   t_errno err;
   pthread_mutex_t lis_done;
@@ -85,11 +85,9 @@ t_errno ft_init_forks(t_data *data);
 int ft_print_syntax_error(char *program);
 t_errno	ft_free_philos(t_philo **philos, t_errno err);
 t_errno ft_free_data(t_data *data, t_errno err);
-// void *ft_usefree(t_data *data, t_philo **philos, t_errno msg);
 
 // create threads
 t_errno ft_threads_creature(t_data *data);
-//t_bool ft_create_threads(t_data *data);
 
 // philo life cycle
 void	*ft_philo_life_cycle(void *ptr);

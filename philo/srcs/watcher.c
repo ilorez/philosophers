@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:18:31 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 11:12:54 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:22:38 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ t_errno	ft_watcher(t_data *data, t_philo **philos)
 		pthread_mutex_lock(&((philos[id])->lstatus));
 		if ((philos[id])->status == DONE)
 		{
+
 			pthread_mutex_unlock(&((philos[id])->lstatus));
 			pthread_mutex_lock(&(data->lfinish_count));
 			if (data->finish_count == data->philo_num)
 			{
 				pthread_mutex_unlock(&(data->lfinish_count));
 				pthread_mutex_lock(&(data->lis_done));
-				data->is_done = true;
+				data->is_done = 1;
 				pthread_mutex_unlock(&(data->lis_done));
 				break ;
 			}
@@ -46,12 +47,11 @@ t_errno	ft_watcher(t_data *data, t_philo **philos)
 			id++;
 			continue ;
 		}
-		//pthread_mutex_lock(&((philos[id])->lstatus));
 		pthread_mutex_lock(&((philos[id])->lstart_time));
 		if (((ft_time_now() - (philos[id])->start_time) > data->tdie) && (philos[id]->status != EATING))
 		{
 			pthread_mutex_lock(&(data->lis_done));
-			data->is_done = true;
+			data->is_done = 1;
 			pthread_mutex_unlock(&(data->lis_done));
 			(philos[id])->status = DIE;
 			pthread_mutex_unlock(&((philos[id])->lstart_time));
