@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:51:08 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:59:16 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ t_errno ft_init_forks(t_data *data);
 // on errors
 //void *ft_on_error(char *err_msg);
 int ft_print_syntax_error(char *program);
+t_errno	ft_free_philos(t_philo **philos, t_errno err);
 t_errno ft_free_data(t_data *data, t_errno err);
 // void *ft_usefree(t_data *data, t_philo **philos, t_errno msg);
 
 // create threads
+t_errno ft_threads_creature(t_data *data);
 //t_bool ft_create_threads(t_data *data);
 
 // philo life cycle

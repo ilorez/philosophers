@@ -6,7 +6,7 @@
 #    By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 16:06:35 by znajdaou          #+#    #+#              #
-#    Updated: 2025/02/25 10:12:58 by znajdaou         ###   ########.fr        #
+#    Updated: 2025/02/26 09:57:32 by znajdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS= philo.c init_data.c init_forks.c\
 			ft_atol.c ft_isdigit.c ft_isspace.c \
 			ft_calloc.c ft_pututils.c \
 			print_msg_status.c utils.c ft_memcpy.c \
-			ft_errno.c
+			ft_errno.c \
+			threads_creature.c
 
 # create_threads.c 
 # philo_life_cycle.c 

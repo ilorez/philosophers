@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:32:40 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:31:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:58:07 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,9 @@ int	main(int ac, char **av)
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL), ERR_MALLOC_FAIL); // TODO:
-	if (ft_init_data(data, ac, av) != 0)                           
-		// TODO:[ ]: is it DONE
+	if (ft_init_data(data, ac, av) != 0)                          // TODO:[ ]: is it DONE
 		return (ft_free_data(data, data->err));                     // TODO:
 	print_t_data(data);
-	// if (!ft_create_threads(data)) // TODO:[ ]: is it DONE
-	//  return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	data->err = ft_threads_creature(data); // TODO:[ ]: is it DONE
+	return (ft_free_data(data, data->err));
 }

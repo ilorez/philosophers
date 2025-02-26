@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:29:28 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:59:33 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:57:35 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,30 @@ t_errno	ft_free_data(t_data *data, t_errno err)
 	return (err);
 }
 
-void	*ft_usefree(t_data *data, t_philo **philos, t_errno err)
+t_errno	ft_free_philos(t_philo **philos, t_errno err)
 {
-	if (philos)
-		ft_free_lst((void **)philos);
-	if (data)
-		ft_free_data(data, err);
-	return (NULL);
+  int i;
+	if (!philos)
+    return (err);
+
+  i = 0;
+	while (philos[i])
+  {
+		free(philos[i]);
+    i++;
+  }
+	free(philos);
+	return (err);
 }
+
+//t_errno ft_usefree(t_data *data, t_philo **philos, t_errno err)
+//{
+//	if (philos)
+//		ft_free_lst((void **)philos);
+//	if (data)
+//		ft_free_data(data, err);
+//	return (err);
+//}
 
 int	ft_print_syntax_error(char *program)
 {

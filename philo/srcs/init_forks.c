@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:58:04 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/25 10:26:27 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:20:52 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_errno	ft_init_forks(t_data *data)
 	if (!forks)
 		return (ERR_MALLOC_FAIL);
 	while (++i < data->philo_num)
-		if (pthread_mutex_init(forks++, NULL) != 0)
+		if (pthread_mutex_init(&(forks[i]), NULL) != 0)
 			return (ERR_MUTEX_INIT);
 	data->forks = forks;
 	return (ERR_SUCCESS);
