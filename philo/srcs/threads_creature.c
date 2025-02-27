@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:24:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 15:39:30 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/27 08:11:01 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_errno ft_threads_creature(t_data *data)
 			return (ft_free_philos(philos, ERR_MUTEX_INIT));
 		if (pthread_mutex_init(&(philos[i]->lstart_time), NULL) != 0)
 			return (ft_free_philos(philos, ERR_MUTEX_INIT));
-	  ft_change_time(&(philos[i]->start_time), &(philos[i]->lstart_time));
+    philos[i]->start_time = data->start_time;
+	  //ft_change_time(&(philos[i]->start_time), &(philos[i]->lstart_time));
 		if (pthread_create(&(philos[i]->thr), NULL, &ft_philo_life_cycle, philos[i]) != 0)
 		{
 			pthread_mutex_lock(&(data->lis_done));

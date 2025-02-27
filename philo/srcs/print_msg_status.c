@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:21:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 15:13:01 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/27 08:17:43 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_print_msg_status(t_philo *philo)
 {
 	char	*status[STATUS_COUNT];
+  time_t time;
 
 	if (philo->status < 0 || philo->status >= STATUS_COUNT
 		|| philo->status == DONE)
@@ -25,11 +26,12 @@ void	ft_print_msg_status(t_philo *philo)
 	status[THINKING] = "is thinking";
 	status[DIE] = "died";
 	status[DONE] = "";
+  time = ft_time_now() - philo->data->start_time;
   pthread_mutex_lock(&(philo->lstatus));
 	pthread_mutex_lock(&(philo->data->lis_done));
   if ((philo->data->is_done == 0) || (philo->status == DIE && philo->data->is_done == 1))
   {
-	  printf("%lu %d %s\n", ft_time_now() - philo->data->start_time, philo->id, status[philo->status]);
+	  printf("%lu %d %s\n", time, philo->id, status[philo->status]);
     if (philo->status == DIE)
       philo->data->is_done = 2;
   }

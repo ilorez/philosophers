@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 14:32:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/27 08:04:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #include <stdint.h>
 #include "t_errno.h"
 
+#define MAX_PHILO_NUM 200
+#define MIN_PHILO_NUM 1
 #define MAX_ARG_RANGE 2147483649 
 // it's should always be between ]0, long long[  NOTE: o and long long not included
 // max: 9223372036854775806
@@ -97,6 +99,7 @@ void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
 void ft_free_lst(void **lst);
 time_t ft_time_now();
 void	ft_change_time(time_t *var, pthread_mutex_t *lock);
+void ft_dely(time_t time);
 
 // watcher
 t_errno ft_watcher(t_data *data, t_philo **philos);

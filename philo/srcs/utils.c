@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 14:53:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/27 08:17:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,10 @@ void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
   else 
 	  pthread_mutex_unlock(&(data->lis_done));
 	return ;
+}
+
+void ft_dely(time_t time)
+{
+  while (ft_time_now() < time)
+    continue ;
 }

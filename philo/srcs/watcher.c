@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:18:31 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/26 15:22:38 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/27 07:52:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_errno	ft_watcher(t_data *data, t_philo **philos)
 {
 	int	id;
 
-	printf("watcher: i'm here for you domies for got any died trash\n");
+	//printf("watcher: i'm here for you domies for got any died trash\n");
 	pthread_mutex_lock(&(data->lis_done));
 	if (data->is_done)
   {
@@ -25,6 +25,7 @@ t_errno	ft_watcher(t_data *data, t_philo **philos)
   }
 	pthread_mutex_unlock(&(data->lis_done));
 	id = 0;
+  ft_dely(data->start_time);
 	while (true)
 	{
 		if (id == data->philo_num)
