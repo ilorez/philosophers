@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:58:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/28 10:14:29 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/28 11:23:14 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ void	*ft_philo_life_cycle(void *ptr) {
 		ft_msleep(p->data->teat);
 		pthread_mutex_unlock(&(p->data->forks[left % p->data->philo_num]));
 		pthread_mutex_unlock(&(p->data->forks[(left + 1) % p->data->philo_num]));
+    pthread_mutex_lock(&(p->data->lis_done));
+    if (p->data->is_done != 0 || p->eats >= p->data->max_eats)
+    {
+		  pthread_mutex_unlock(&(p->data->lis_done));
+      break;
+    }
+		pthread_mutex_unlock(&(p->data->lis_done));
 		ft_change_status(p->data, p, SLEEPING);
 		ft_msleep(p->data->tsleep);
 		ft_change_status(p->data, p, THINKING);
@@ -47,13 +54,7 @@ void	*ft_philo_life_cycle(void *ptr) {
     pthread_mutex_lock(&(p->lstatus));
     p->status = WAITING_FORKS;
     pthread_mutex_unlock(&(p->lstatus));
-		pthread_mutex_lock(&(p->data->lis_done));
-    if (p->data->is_done != 0)
-    {
-		  pthread_mutex_unlock(&(p->data->lis_done));
-      break;
-    }
-		pthread_mutex_unlock(&(p->data->lis_done));
+		
 	}
 	pthread_mutex_lock(&(p->lstatus));
 	p->status = DONE;
@@ -61,7 +62,7 @@ void	*ft_philo_life_cycle(void *ptr) {
 	pthread_mutex_lock(&(p->data->lfinish_count));
 	p->data->finish_count += 1;
 	pthread_mutex_unlock(&(p->data->lfinish_count));
-  printf("Done %d\n", p->id);
+  //printf("Done %d\n", p->id);
   return (NULL);
 }
 
@@ -101,6 +102,6 @@ void ft_think_time(t_philo *p, t_bool start)
   else if (time > 200)
     time = 200;
 	pthread_mutex_unlock(&(p->lstart_time));
-  printf("think time is: %ld\n", time);
+  //printf("think time is: %ld\n", time);
   ft_msleep(time);
 }
