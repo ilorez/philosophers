@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/27 10:11:29 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/28 08:43:07 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ t_errno	ft_init_data(t_data *data, int ac, char **av)
 	if (data->err)
 		return (data->err);
 	data->start_time = ft_time_now() + data->philo_num * 15;
-	if (data->tdie > data->tsleep + data->teat)
-		data->tthink = data->tdie - data->tsleep - data->teat;
-  else 
-    data->tthink = 1;
-  if (data->tthink > 200)
-    data->tthink = 200;
 	return (ERR_SUCCESS);
 }
 
