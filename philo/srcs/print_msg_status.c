@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:21:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/27 08:17:43 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/28 08:55:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	ft_print_msg_status(t_philo *philo)
 	char	*status[STATUS_COUNT];
   time_t time;
 
+
+  pthread_mutex_lock(&(philo->lstatus));
 	if (philo->status < 0 || philo->status >= STATUS_COUNT
 		|| philo->status == DONE)
 		return ;
+	pthread_mutex_unlock(&(philo->lstatus));
 	status[WAITING_FORKS] = "has taken a fork";
 	status[EATING] = "is eating";
 	status[SLEEPING] = "is sleeping";
