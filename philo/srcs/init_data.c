@@ -22,11 +22,11 @@ t_errno	ft_init_data(t_data *data, int ac, char **av)
 	data->err = ft_parsing_params(data, ac, av);
 	if (data->err)
 		return (data->err);
-  if (data->philo_num > MAX_PHILO_NUM || data->philo_num < MIN_PHILO_NUM)
-  {
-    data->err = ERR_PHILO_NUM;
-    return (data->err);
-  }
+	if (data->philo_num > MAX_PHILO_NUM || data->philo_num < MIN_PHILO_NUM)
+	{
+		data->err = ERR_PHILO_NUM;
+		return (data->err);
+	}
 	if (pthread_mutex_init(&(data->lis_done), NULL) != 0
 		|| pthread_mutex_init(&(data->lfinish_count), NULL) != 0)
 	{

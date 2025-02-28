@@ -6,26 +6,14 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/27 08:17:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:57:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_free_lst(void **lst)
-{
-	void	**org;
-
-	if (!lst)
-		return ;
-	org = lst;
-	while (*lst)
-		free(*lst++);
-	free(org);
-	return ;
-}
-
-time_t	ft_time_now()
+// return current time in ms
+time_t	ft_time_now(void)
 {
 	time_t			mills;
 	struct timeval	tv;
@@ -35,6 +23,7 @@ time_t	ft_time_now()
 	return (mills);
 }
 
+// change the value of var which is a pointer to current time in ms
 void	ft_change_time(time_t *var, pthread_mutex_t *lock)
 {
 	pthread_mutex_lock(lock);
@@ -42,6 +31,7 @@ void	ft_change_time(time_t *var, pthread_mutex_t *lock)
 	pthread_mutex_unlock(lock);
 }
 
+// change philo->status to "to" status
 void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
 {
 	pthread_mutex_lock(&(philo->lstatus));
@@ -50,16 +40,30 @@ void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
 	pthread_mutex_lock(&(data->lis_done));
 	if (!(data->is_done))
 	{
-	  pthread_mutex_unlock(&(data->lis_done));
+		pthread_mutex_unlock(&(data->lis_done));
 		ft_print_msg_status(philo);
 	}
-  else 
-	  pthread_mutex_unlock(&(data->lis_done));
+	else
+		pthread_mutex_unlock(&(data->lis_done));
 	return ;
 }
 
-void ft_dely(time_t time)
+// return after current time is more then or egal the time got as param
+void	ft_dely(time_t time)
 {
-  while (ft_time_now() < time)
-    continue ;
+	while (ft_time_now() < time)
+		continue ;
+}
+
+// work for checking the cond if its true after lock it
+t_bool	ft_mutex_cond(int *cond, pthread_mutex_t *lock)
+{
+	t_bool	re;
+
+	re = false;
+	pthread_mutex_lock(lock);
+	if (*cond)
+		re = true;
+	pthread_mutex_unlock(lock);
+	return (re);
 }

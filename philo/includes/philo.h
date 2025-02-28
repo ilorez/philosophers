@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/27 08:04:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:41:03 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ typedef enum s_pstatus
   SLEEPING,
   THINKING,
   DIE,
-  DONE,
-  STATUS_COUNT
+  DONE
 } t_pstatus;
 
 typedef struct s_data
@@ -90,19 +89,22 @@ t_errno ft_free_data(t_data *data, t_errno err);
 
 // create threads
 t_errno ft_threads_creature(t_data *data);
+t_errno ft_clean_table(t_data *data, t_philo **philos);
 
 // philo life cycle
 void	*ft_philo_life_cycle(void *ptr);
-void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
 
 // utils
-void ft_free_lst(void **lst);
 time_t ft_time_now();
 void	ft_change_time(time_t *var, pthread_mutex_t *lock);
 void ft_dely(time_t time);
+t_bool ft_mutex_cond(int *cond, pthread_mutex_t *lock);
+void ft_change_status(t_data *data, t_philo *philo, t_pstatus to);
 
 // watcher
 t_errno ft_watcher(t_data *data, t_philo **philos);
+int ft_is_finish_eating(t_data *data, t_philo *philo);
+t_bool ft_strave_check(t_data *data, t_philo *philo);
 
 // utils folder
 long long	ft_atol(const char *nptr);
@@ -116,5 +118,9 @@ void	ft_putstr_fd(char *s, int fd);
 
 // print msg status
 void ft_print_msg_status(t_philo *philo);
+
+// philo utils
+void ft_msleep(time_t time);
+void ft_think_time(t_philo *p, t_bool start);
 
 #endif

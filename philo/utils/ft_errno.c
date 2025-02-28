@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/27 08:03:49 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:38:45 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	_ft_create_err_list(t_errno_msg lst[ERR_COUNT])
 		"philo num must be between [1, 200]\n"};
 	err_msgs[ERR_PTHREAD_JOIN] = (t_errno_msg){ERR_PTHREAD_JOIN,
 		"pthread join field\n"};
+	err_msgs[ERR_PTHREAD_CREATE] = (t_errno_msg){ERR_PTHREAD_CREATE,
+		"pthread create field\n"};
 	err_msgs[ERR_ARG_RANGE_INT] = (t_errno_msg){ERR_ARG_RANGE_INT,
 		"invalid argument out of range int\n"};
 	err_msgs[ERR_ARG_RANGE] = (t_errno_msg){ERR_ARG_RANGE,
