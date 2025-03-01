@@ -1,4 +1,4 @@
 
 okay lock you should order the locks using this one 
 status -> start_time -> finish_count -> is_done --> ...
-
+[] mutex_destory : what it's use for and did i need really to call it
