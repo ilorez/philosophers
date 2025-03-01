@@ -6,73 +6,78 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:58:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/28 16:00:23 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/01 09:30:38 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_bool ft_hold_forks(t_philo *p, pthread_mutex_t *forks,int left, int r8)
+t_bool	ft_hold_forks(t_philo *p, pthread_mutex_t *forks, int a, int b)
 {
-  pthread_mutex_lock(&(forks[left]));
+	pthread_mutex_lock(&(forks[a]));
 	ft_print_msg_status(p);
-  if (left == r8)
-    return (false);
-	pthread_mutex_lock(&(forks[r8]));
+	if (a == b)
+		return (false);
+	pthread_mutex_lock(&(forks[b]));
 	ft_print_msg_status(p);
-  return (true);
+	return (true);
 }
 
-void	*ft_philo_life_cycle(void *ptr) {
-	t_philo	*p;
-  int left;
-
-  // id start counting from 1 not 0
-	p = (t_philo *)ptr;
-  if (p->id % 2 == 0)
-    left = p->id; // id +1
-  else 
-    left = p->id - 1; // id 
-  ft_dely(p->data->start_time);
-  if (p->id % 2 == 0)
-    ft_think_time(p, true);
-  while (true)
+// philo habits
+t_bool	ft_life_habits(t_data *data, t_philo *p, int first, int second)
+{
+	ft_dely(p->data->start_time);
+	if (p->id % 2 == 0)
+		ft_think_time(p, true);
+	while (true)
 	{
-    // get forks
-    if (!ft_hold_forks(p, p->data->forks, left % p->data->philo_num, (left + 1) % p->data->philo_num))
-      return (NULL);
-    // eating
-		ft_change_status(p->data, p, EATING);
+		if (!ft_hold_forks(p, data->forks, first, second))
+			return (false);
+		ft_change_status(data, p, EATING);
 		ft_change_time(&(p->start_time), &(p->lstart_time));
-		ft_msleep(p->data->teat);
-    // put forks
-		pthread_mutex_unlock(&(p->data->forks[left % p->data->philo_num]));
-		pthread_mutex_unlock(&(p->data->forks[(left + 1) % p->data->philo_num]));
-    // check done
-    pthread_mutex_lock(&(p->data->lis_done));
-    if (p->data->is_done != 0 || (p->eats >= p->data->max_eats && p->data->limited))
-    {
-		  pthread_mutex_unlock(&(p->data->lis_done));
-      break;
-    }
-		pthread_mutex_unlock(&(p->data->lis_done));
-    // sleeping
-		ft_change_status(p->data, p, SLEEPING);
-		ft_msleep(p->data->tsleep);
-    // thinking
-		ft_change_status(p->data, p, THINKING);
-    ft_think_time(p, false);
-    // waiting forks
-    pthread_mutex_lock(&(p->lstatus));
-    p->status = WAITING_FORKS;
-    pthread_mutex_unlock(&(p->lstatus));
-		
+		ft_msleep(data->teat);
+		pthread_mutex_unlock(&(data->forks[first]));
+		pthread_mutex_unlock(&(data->forks[second]));
+		if (ft_mutex_cond(&(data->is_done), &(data->lis_done)))
+			break ;
+		if ((++(p->eats) >= data->max_eats && data->limited))
+			break ;
+		ft_change_status(data, p, SLEEPING);
+		ft_msleep(data->tsleep);
+		ft_change_status(data, p, THINKING);
+		ft_think_time(p, false);
+		pthread_mutex_lock(&(p->lstatus));
+		p->status = WAITING_FORKS;
+		pthread_mutex_unlock(&(p->lstatus));
 	}
+	return (true);
+}
+
+// id start counting from 1 not 0
+void	*ft_philo_life_cycle(void *ptr)
+{
+	t_philo	*p;
+	int		first;
+	int		second;
+
+	p = (t_philo *)ptr;
+	if (p->id % 2 == 0)
+	{
+		first = p->id % p->data->philo_num;
+		second = p->id - 1;
+	}
+	else
+	{
+		first = p->id - 1;
+		second = p->id % p->data->philo_num;
+	}
+	if (!ft_life_habits(p->data, p, first, second))
+		return (NULL);
 	pthread_mutex_lock(&(p->lstatus));
 	p->status = DONE;
 	pthread_mutex_unlock(&(p->lstatus));
 	pthread_mutex_lock(&(p->data->lfinish_count));
 	p->data->finish_count += 1;
 	pthread_mutex_unlock(&(p->data->lfinish_count));
-  return (NULL);
+	return (NULL);
 }
