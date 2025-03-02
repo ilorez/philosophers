@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/01 09:32:20 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:15:35 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define MAX_PHILO_NUM 200
 # define MIN_PHILO_NUM 1
 # define MAX_ARG_RANGE 2147483649
-// it's should always be between ]0,
-// long long[  NOTE: o and long long not included
+// it's should always be between [0,
+// long long[  NOTE: long long not included
 
 // max: 9223372036854775806
 
@@ -68,7 +68,7 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	unsigned int	id;
+	int				id;
 	int				eats;
 	time_t			start_time;
 	t_pstatus		status;
