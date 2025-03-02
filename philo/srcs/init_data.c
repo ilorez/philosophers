@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/01 07:49:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/02 08:48:24 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static t_errno	ft_get_time_t(char *str, time_t *num, t_errno *err)
 		return (*err);
 	}
 	re = ft_atol(str);
-	if (re <= 0 || re > MAX_ARG_RANGE)
+	if (re < 0 || re > MAX_ARG_RANGE)
 	{
 		*err = ERR_ARG_RANGE;
 		return (*err);

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:58:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/01 09:30:38 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/02 08:55:23 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ t_bool	ft_hold_forks(t_philo *p, pthread_mutex_t *forks, int a, int b)
 	pthread_mutex_lock(&(forks[a]));
 	ft_print_msg_status(p);
 	if (a == b)
+	{
+		pthread_mutex_unlock(&(forks[a]));
 		return (false);
+	}
 	pthread_mutex_lock(&(forks[b]));
 	ft_print_msg_status(p);
 	return (true);

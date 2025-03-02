@@ -6,7 +6,7 @@
 #    By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 16:06:35 by znajdaou          #+#    #+#              #
-#    Updated: 2025/03/01 09:33:29 by znajdaou         ###   ########.fr        #
+#    Updated: 2025/03/02 08:19:33 by znajdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ reset = \033[0m
 all: $(NAME)
 	@echo "$(green)SUCCESS!!!$(reset)"
 
-$(BUILD_DR)%.o: %.c ./includes/philo.h | $(BUILD_DR) 
+$(BUILD_DR)%.o: %.c ./includes/philo.h ./includes/t_errno.h | $(BUILD_DR) 
 	$(CC) $(FLAGS) $(INCLUDES_DRS) -c $< -o $@
 
 $(NAME): $(OBJS)

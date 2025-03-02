@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/28 15:38:45 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/02 08:53:36 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,19 @@ static void	_ft_create_err_list(t_errno_msg lst[ERR_COUNT])
 	err_msgs[ERR_MALLOC_FAIL] = (t_errno_msg){ERR_MALLOC_FAIL,
 		"an allocation failed\n"};
 	err_msgs[ERR_MUTEX_INIT] = (t_errno_msg){ERR_MUTEX_INIT,
-		"mutex init field\n"};
+		"mutex init failed\n"};
 	err_msgs[ERR_PHILO_NUM] = (t_errno_msg){ERR_PHILO_NUM,
 		"philo num must be between [1, 200]\n"};
 	err_msgs[ERR_PTHREAD_JOIN] = (t_errno_msg){ERR_PTHREAD_JOIN,
-		"pthread join field\n"};
+		"pthread join failed\n"};
 	err_msgs[ERR_PTHREAD_CREATE] = (t_errno_msg){ERR_PTHREAD_CREATE,
-		"pthread create field\n"};
+		"pthread create failed\n"};
+	err_msgs[ERR_MUTEX_DESTROY] = (t_errno_msg){ERR_MUTEX_DESTROY,
+		"pthread mutex destroy failed\n"};
 	err_msgs[ERR_ARG_RANGE_INT] = (t_errno_msg){ERR_ARG_RANGE_INT,
-		"invalid argument out of range int\n"};
+		"invalid argument:\n\t \
+make sure that <number of philos> and <max eat time> \
+is between [1, INT_MAX]\n"};
 	err_msgs[ERR_ARG_RANGE] = (t_errno_msg){ERR_ARG_RANGE,
 		"invalid argument out of range\n"};
 	err_msgs[ERR_UNKNOWN] = (t_errno_msg){ERR_UNKNOWN,

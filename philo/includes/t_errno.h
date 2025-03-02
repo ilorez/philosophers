@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/28 15:38:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/02 08:46:09 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum s_errno
 	ERR_MUTEX_INIT,
 	ERR_PTHREAD_JOIN,
 	ERR_PTHREAD_CREATE,
+	ERR_MUTEX_DESTROY,
 	ERR_PHILO_NUM,
 	ERR_UNKNOWN,
 	ERR_COUNT
