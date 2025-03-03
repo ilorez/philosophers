@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 15:51:41 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 08:18:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ typedef enum s_pstatus
 	DONE
 }					t_pstatus;
 
+typedef struct s_sem 
+{
+  char *name;
+  sem_t *addr;
+} t_sem;
+
 typedef struct s_data
 {
 	int				philo_num;
@@ -64,9 +70,9 @@ typedef struct s_data
 	time_t			start_time;
 	t_bool			limited;
 	t_errno			err;
-  sem_t *forks;
-  sem_t *write;
-  sem_t *die;
+  t_sem forks;
+  t_sem write;
+  t_sem die;
 }					t_data;
 
 typedef struct s_philo
