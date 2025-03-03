@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 12:02:14 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:39:03 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/time.h>
 # include <sys/types.h>
 # include <unistd.h>
+#include <sys/wait.h>
 // #include <signal.h>  /* for kill */
 // #include <sys/stat.h>        /* For mode constants */
 
@@ -73,6 +74,7 @@ typedef struct s_data
 	t_sem			forks;
 	t_sem			write;
 	t_sem			die;
+  int *pid;
 }					t_data;
 
 typedef struct s_philo
@@ -127,8 +129,11 @@ void				ft_msleep(time_t time);
 void				ft_think_time(t_philo *p, t_bool start);
 
 // sema_utitls
-char				*ft_randname(void);
+char				*ft_randname(void *sema);
 t_bool				ft_sem_open(t_sem *sema, int value, t_errno *err);
 void				ft_free_t_sem(t_sem *sema);
+
+// philos creature
+t_errno ft_philos_creature(t_data *d);
 
 #endif

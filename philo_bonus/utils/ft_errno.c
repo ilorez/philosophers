@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 11:58:32 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:37:09 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	_ft_create_err_list(char *lst[ERR_COUNT])
 	err_msgs[ERR_INVALID_ARG] = "invalid argument\n";
 	err_msgs[ERR_EMPTY_ARG] = "Empty argumnet\n";
 	err_msgs[ERR_MALLOC_FAIL] = "an allocation failed\n";
+	err_msgs[ERR_FORK_FAILED] = "fork failed\n";
 	err_msgs[ERR_MUTEX_INIT] = "mutex init failed\n";
 	err_msgs[ERR_PHILO_NUM] = "philo num must be between [1, 200]\n";
 	err_msgs[ERR_SEM_OPEN] = "fieled to create semaphore\n";

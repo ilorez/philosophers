@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:32:40 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 11:50:57 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:38:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL), ERR_MALLOC_FAIL);
 	if (ft_init_data(data, ac, av) != 0)
 		return (ft_free_data(data, data->err));
+  ft_philos_creature(data);
 	return (ft_free_data(data, data->err));
 }
 

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 11:57:57 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:37:11 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum s_errno
 	ERR_INVALID_ARG,
 	ERR_EMPTY_ARG,
 	ERR_MALLOC_FAIL,
+  ERR_FORK_FAILED,
 	ERR_ARG_RANGE,
 	ERR_ARG_RANGE_INT,
 	ERR_MUTEX_INIT,

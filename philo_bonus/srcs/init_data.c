@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 11:04:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:19:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ t_errno	ft_init_data(t_data *data, int ac, char **av)
 		data->err = ERR_PHILO_NUM;
 		return (data->err);
 	}
+  data->pid = ft_calloc(sizeof(int), data->philo_num);
+  if (!(data->pid))
+  {
+    data->err = ERR_MALLOC_FAIL; 
+    return (data->err);
+  }
 	if (!ft_sem_open(&(data->forks), data->philo_num, &(data->err)))
 		return (data->err);
 	if (!ft_sem_open(&(data->write), 1, &(data->err)))
