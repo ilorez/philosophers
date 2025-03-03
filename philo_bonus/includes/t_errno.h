@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 08:46:09 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:57:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,11 @@ typedef enum s_errno
 	ERR_PTHREAD_JOIN,
 	ERR_PTHREAD_CREATE,
 	ERR_MUTEX_DESTROY,
+  ERR_SEM_OPEN,
 	ERR_PHILO_NUM,
 	ERR_UNKNOWN,
 	ERR_COUNT
 }			t_errno;
-
-// Errno message structure
-typedef struct s_errno_msg
-{
-	t_errno	code;
-	char	*message;
-}			t_errno_msg;
 
 // Errno function
 void		ft_perror(char *msg, t_errno errno_num);

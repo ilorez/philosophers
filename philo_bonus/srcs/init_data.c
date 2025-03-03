@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 08:28:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:04:22 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,6 @@ static t_bool	ft_is_valid(char *str);
 static t_errno	ft_get_time_t(char *str, time_t *num, t_errno *err);
 static t_errno	ft_get_int(char *str, int *num, t_errno *err);
 
-t_errno ft_sem_open(t_sem *sema, int value)
-{
-  sema->addr = sem_open(sema->name, O_CREAT | O_EXCL, 777, value);
-  if (sema->addr == SEM_FAILED)
-  {
-    perror("Error");// WARN: remove me
-    return (ERR_SEM_OPEN);
-  }
-  return (ERR_SUCCESS);
-}
-
 t_errno	ft_init_data(t_data *data, int ac, char **av)
 {
 	data->err = ft_parsing_params(data, ac, av);
@@ -39,20 +28,12 @@ t_errno	ft_init_data(t_data *data, int ac, char **av)
 		data->err = ERR_PHILO_NUM;
 		return (data->err);
 	}
-  if (ft_sem_open(&(data->forks), data->philo_num))
-
-  data->write.addr = sem_open(data->write.name, O_CREAT | O_EXCL, 777, 1);
-  if (data->forks == SEM_FAILED)
-  {
-    perror("Error");// WARN: remove me
-    return (ERR_SEM_OPEN);
-  }
-  data->die.addr = sem_open(data->die.name, O_CREAT | O_EXCL, 777, 0);
-  if (data->forks == SEM_FAILED)
-  {
-    perror("Error");// WARN: remove me
-    return (ERR_SEM_OPEN);
-  }
+  if (!ft_sem_open(&(data->forks), data->philo_num, &(data->err)))
+    return (data->err);
+  if (!ft_sem_open(&(data->write), 1, &(data->err)))
+    return (data->err);
+  if (!ft_sem_open(&(data->die), 0, &(data->err)))
+    return (data->err);
 	data->start_time = ft_time_now() + data->philo_num * 20;
 	return (ERR_SUCCESS);
 }

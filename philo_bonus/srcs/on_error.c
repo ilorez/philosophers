@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:29:28 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 16:01:04 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:49:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 t_errno	ft_free_data(t_data *data, t_errno err)
 {
+  ft_free_t_sem(&(data->forks));
+  ft_free_t_sem(&(data->write));
+  ft_free_t_sem(&(data->die));
 	if (data)
 	  free(data);
   if (err)

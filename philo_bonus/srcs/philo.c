@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 17:32:40 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 16:00:50 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:50:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ int	main(int ac, char **av)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL), ERR_MALLOC_FAIL);
 	if (ft_init_data(data, ac, av) != 0)
 		return (ft_free_data(data, data->err));
-  print_t_data(data);
-	//data->err = ft_threads_creature(data);
 	return (ft_free_data(data, data->err));
 }
 
+/*
 void	print_t_data(const t_data *data)
 {
+  int value;
+
+  value = 99;
 	if (!data)
 	{
 		printf("Data is NULL.\n");
@@ -46,6 +48,12 @@ void	print_t_data(const t_data *data)
 	printf("  tthink: %lu\n", data->tthink);
 	printf("  the_start_time: %ld\n", data->start_time);
 	printf("  limited: %s\n", data->limited ? "true" : "false");
+
+  sem_getvalue(data->forks.addr, &value);
+  printf("  forks sema value is: %d\n", value);
+  sem_getvalue(data->die.addr, &value);
+  printf("  die sema value is: %d\n", value);
+  sem_getvalue(data->write.addr, &value);
+  printf("  print sema value is: %d\n", value);
 }
-
-
+*/

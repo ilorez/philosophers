@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 08:18:06 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:31:42 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ void				ft_dely(time_t time);
 t_bool				ft_mutex_cond(int *cond, pthread_mutex_t *lock);
 void				ft_change_status(t_data *data, t_philo *philo,
 						t_pstatus to);
+char	*ft_itoa(long n);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *s);
 
 // utils folder
 long long			ft_atol(const char *nptr);
@@ -123,5 +126,10 @@ void				ft_print_msg_status(t_philo *philo);
 // philo utils
 void				ft_msleep(time_t time);
 void				ft_think_time(t_philo *p, t_bool start);
+
+// sema_utitls
+char	*ft_randname();
+t_bool ft_sem_open(t_sem *sema, int value, t_errno *err);
+void ft_free_t_sem(t_sem *sema);
 
 #endif
