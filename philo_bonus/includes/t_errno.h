@@ -26,14 +26,14 @@ typedef enum s_errno
 	ERR_PTHREAD_JOIN,
 	ERR_PTHREAD_CREATE,
 	ERR_MUTEX_DESTROY,
-  ERR_SEM_OPEN,
+	ERR_SEM_OPEN,
 	ERR_PHILO_NUM,
 	ERR_UNKNOWN,
 	ERR_COUNT
-}			t_errno;
+}		t_errno;
 
 // Errno function
-void		ft_perror(char *msg, t_errno errno_num);
-void		ft_strerr(t_errno errno_num);
+void	ft_perror(char *msg, t_errno errno_num);
+void	ft_strerr(t_errno errno_num);
 
 #endif

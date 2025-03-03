@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-// include 
+// include
 static int		ft_parsing_params(t_data *data, int ac, char **av);
 static t_bool	ft_is_valid(char *str);
 static t_errno	ft_get_time_t(char *str, time_t *num, t_errno *err);
@@ -28,12 +28,12 @@ t_errno	ft_init_data(t_data *data, int ac, char **av)
 		data->err = ERR_PHILO_NUM;
 		return (data->err);
 	}
-  if (!ft_sem_open(&(data->forks), data->philo_num, &(data->err)))
-    return (data->err);
-  if (!ft_sem_open(&(data->write), 1, &(data->err)))
-    return (data->err);
-  if (!ft_sem_open(&(data->die), 0, &(data->err)))
-    return (data->err);
+	if (!ft_sem_open(&(data->forks), data->philo_num, &(data->err)))
+		return (data->err);
+	if (!ft_sem_open(&(data->write), 1, &(data->err)))
+		return (data->err);
+	if (!ft_sem_open(&(data->die), 0, &(data->err)))
+		return (data->err);
 	data->start_time = ft_time_now() + data->philo_num * 20;
 	return (ERR_SUCCESS);
 }

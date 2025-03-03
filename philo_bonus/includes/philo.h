@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 11:31:42 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:02:14 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 # define PHILO_H
 
 # include "t_errno.h"
+# include <fcntl.h> /* For O_* constants */
 # include <limits.h>
-# include <semaphore.h>
 # include <pthread.h>
+# include <semaphore.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <sys/types.h>
 # include <unistd.h>
-#include <sys/types.h>
-# include <fcntl.h>           /* For O_* constants */
 // #include <signal.h>  /* for kill */
 // #include <sys/stat.h>        /* For mode constants */
 
@@ -53,11 +53,11 @@ typedef enum s_pstatus
 	DONE
 }					t_pstatus;
 
-typedef struct s_sem 
+typedef struct s_sem
 {
-  char *name;
-  sem_t *addr;
-} t_sem;
+	char			*name;
+	sem_t			*addr;
+}					t_sem;
 
 typedef struct s_data
 {
@@ -70,24 +70,24 @@ typedef struct s_data
 	time_t			start_time;
 	t_bool			limited;
 	t_errno			err;
-  t_sem forks;
-  t_sem write;
-  t_sem die;
+	t_sem			forks;
+	t_sem			write;
+	t_sem			die;
 }					t_data;
 
 typedef struct s_philo
 {
-  unsigned int  id;
-  int        eats;
-  time_t      start_time; 
-  t_pstatus    status;
-  pthread_t    thr;
-  t_bool is_done; // in case if that true the main thread in philo will  break destroy and free
-  pthread_mutex_t  lis_done;
-  pthread_mutex_t  lstart_time;
-  pthread_mutex_t  lstatus;
-  t_data      *data;
-}          t_philo;
+	unsigned int	id;
+	int				eats;
+	time_t			start_time;
+	t_pstatus		status;
+	pthread_t		thr;
+	t_bool			is_done;
+	pthread_mutex_t	lis_done;
+	pthread_mutex_t	lstart_time;
+	pthread_mutex_t	lstatus;
+	t_data			*data;
+}					t_philo;
 // functions
 // init data
 t_errno				ft_init_data(t_data *data, int ac, char **av);
@@ -96,8 +96,7 @@ t_errno				ft_init_data(t_data *data, int ac, char **av);
 // void *ft_on_error(char *err_msg);
 int					ft_print_syntax_error(char *program);
 t_errno				ft_free_data(t_data *data, t_errno err);
-t_errno	ft_free_philo(t_philo *philo, t_errno err);
-
+t_errno				ft_free_philo(t_philo *philo, t_errno err);
 
 // utils
 time_t				ft_time_now(void);
@@ -106,9 +105,9 @@ void				ft_dely(time_t time);
 t_bool				ft_mutex_cond(int *cond, pthread_mutex_t *lock);
 void				ft_change_status(t_data *data, t_philo *philo,
 						t_pstatus to);
-char	*ft_itoa(long n);
-char	*ft_strdup(const char *s1);
-size_t	ft_strlen(const char *s);
+char				*ft_itoa(long n);
+char				*ft_strdup(const char *s1);
+size_t				ft_strlen(const char *s);
 
 // utils folder
 long long			ft_atol(const char *nptr);
@@ -128,8 +127,8 @@ void				ft_msleep(time_t time);
 void				ft_think_time(t_philo *p, t_bool start);
 
 // sema_utitls
-char	*ft_randname();
-t_bool ft_sem_open(t_sem *sema, int value, t_errno *err);
-void ft_free_t_sem(t_sem *sema);
+char				*ft_randname(void);
+t_bool				ft_sem_open(t_sem *sema, int value, t_errno *err);
+void				ft_free_t_sem(t_sem *sema);
 
 #endif

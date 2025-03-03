@@ -37,12 +37,12 @@ void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
 	pthread_mutex_lock(&(philo->lstatus));
 	philo->status = to;
 	pthread_mutex_unlock(&(philo->lstatus));
-  (void)data;
-	//pthread_mutex_lock(&(data->lis_done));
-	//if (!(data->is_done))
+	(void)data;
+	// pthread_mutex_lock(&(data->lis_done));
+	// if (!(data->is_done))
 	//{
 	//	pthread_mutex_unlock(&(data->lis_done));
-		ft_print_msg_status(philo);
+	ft_print_msg_status(philo);
 	//}
 	// else
 	//	pthread_mutex_unlock(&(data->lis_done));

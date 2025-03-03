@@ -12,9 +12,10 @@
 
 #include "philo.h"
 #include "t_errno.h"
+
 static void	_ft_create_err_list(char *lst[ERR_COUNT])
 {
-	char*	err_msgs[ERR_COUNT];
+	char	*err_msgs[ERR_COUNT];
 
 	err_msgs[ERR_SUCCESS] = "OK\n";
 	err_msgs[ERR_INVALID_ARG] = "invalid argument\n";
@@ -34,11 +35,9 @@ is between [1, INT_MAX]\n";
 	ft_memcpy(lst, err_msgs, sizeof(char *) * ERR_COUNT);
 }
 
-
-
 void	ft_strerr(t_errno error_code)
 {
-	char *err_msgs[ERR_COUNT];
+	char	*err_msgs[ERR_COUNT];
 
 	_ft_create_err_list(err_msgs);
 	if (error_code < 0 || error_code >= ERR_COUNT)
@@ -48,7 +47,7 @@ void	ft_strerr(t_errno error_code)
 
 void	ft_perror(char *msg, t_errno error_code)
 {
-	char *err_msgs[ERR_COUNT];
+	char	*err_msgs[ERR_COUNT];
 
 	_ft_create_err_list(err_msgs);
 	if (error_code < 0 || error_code >= ERR_COUNT)

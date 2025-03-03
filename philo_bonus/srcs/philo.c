@@ -48,7 +48,6 @@ void	print_t_data(const t_data *data)
 	printf("  tthink: %lu\n", data->tthink);
 	printf("  the_start_time: %ld\n", data->start_time);
 	printf("  limited: %s\n", data->limited ? "true" : "false");
-
   sem_getvalue(data->forks.addr, &value);
   printf("  forks sema value is: %d\n", value);
   sem_getvalue(data->die.addr, &value);
