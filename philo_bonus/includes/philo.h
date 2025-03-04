@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/03 12:39:03 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:09:36 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ typedef struct s_philo
 	int				eats;
 	time_t			start_time;
 	t_pstatus		status;
-	pthread_t		thr;
+	pthread_t		self_watcher;
+	pthread_t		other_watcher;
 	t_bool			is_done;
 	pthread_mutex_t	lis_done;
 	pthread_mutex_t	lstart_time;
@@ -135,5 +136,9 @@ void				ft_free_t_sem(t_sem *sema);
 
 // philos creature
 t_errno ft_philos_creature(t_data *d);
+
+
+// philo life
+t_errno ft_philo_init(int id, t_data *data, t_philo *p);
 
 #endif
