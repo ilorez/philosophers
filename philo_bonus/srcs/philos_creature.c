@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:06:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/04 11:22:55 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:10:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_errno ft_philos_creature(t_data *d)
         exit(d->err);
       }
       // TODO: create philo cyrcle life
+      ft_life_cycle(p);
       // TODO: join threds
       ft_wait_thread(p->self_watcher);
       ft_wait_thread(p->other_watcher);
@@ -63,3 +64,4 @@ t_errno ft_philos_creature(t_data *d)
 		waitpid(d->pid[i], NULL, 0);
   return (d->err);
 }
+

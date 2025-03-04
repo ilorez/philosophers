@@ -6,7 +6,7 @@
 #    By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 16:06:35 by znajdaou          #+#    #+#              #
-#    Updated: 2025/03/04 11:11:37 by znajdaou         ###   ########.fr        #
+#    Updated: 2025/03/04 12:01:54 by znajdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS= philo.c init_data.c\
 			ft_errno.c \
 			ft_itoa.c ft_strdup.c ft_strlen.c \
 			sema_utils.c \
-			philos_creature.c philo_life.c
+			philos_creature.c philo_init.c philo_life.c
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 green = \033[32m
