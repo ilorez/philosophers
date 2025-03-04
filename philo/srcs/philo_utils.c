@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:40:30 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/01 09:30:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:27:33 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ void	ft_think_time(t_philo *p, t_bool start)
 	time_t	time;
 
 	pthread_mutex_lock(&(p->lstart_time));
-	time = (p->data->tdie - (ft_time_now() - p->start_time) - p->data->teat)
-		/ 2;
+	time = (p->data->tdie - (ft_time_now() - p->start_time)) / 2;
 	if (time < 0)
 		time = 0;
 	if (time < 1 && start)
 		time = 1;
-	else if (time > 400)
-		time = 100;
+	else if (time > 200)
+		time = 200;
 	pthread_mutex_unlock(&(p->lstart_time));
 	ft_msleep(time);
 }
