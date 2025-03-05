@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:52:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/05 14:45:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:52:03 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void *ft_self_watcher(void *ptr)
 	  {
 	  	pthread_mutex_unlock(&(p->lstart_time));
 	  	pthread_mutex_lock(&(p->lis_done));
+      if (p->is_done)
+      {
+	  	  pthread_mutex_unlock(&(p->lis_done));
+        return (NULL);
+      }
 	  	p->is_done = true;
 	  	pthread_mutex_unlock(&(p->lis_done));
       sem_post(p->data->die.addr);
