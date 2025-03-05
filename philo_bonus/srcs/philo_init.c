@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:52:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/05 11:52:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:45:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void *ft_self_watcher(void *ptr)
 {
   t_philo *p;
 
-  printf("Hello from slef watcher philo[%d]\n", p->id);
   p = (t_philo *)ptr;
+  printf("Hello from slef watcher philo[%d]\n", p->id);
   ft_dely(p->start_time);
   while (true)
   {
@@ -41,12 +41,10 @@ void *ft_self_watcher(void *ptr)
 	  	pthread_mutex_lock(&(p->lis_done));
 	  	p->is_done = true;
 	  	pthread_mutex_unlock(&(p->lis_done));
-      sem_post(p->data->die);
+      sem_post(p->data->die.addr);
 	  	p->status = DIE;
 	  	pthread_mutex_unlock(&(p->lstatus));
-      sem_wait(p->data->print);
 	  	ft_print_msg_status(p);
-      sem_post(p->data->print);
       break;
 	  }
 	  pthread_mutex_unlock(&(p->lstart_time));
@@ -62,13 +60,13 @@ void *ft_other_watcher(void *ptr)
 {
   t_philo *p;
 
-  printf("Hello from other watcher philo[%d]\n", p->id);
   p = (t_philo *)ptr;
-  sem_wait(p->data->die);
+  printf("Hello from other watcher philo[%d]\n", p->id);
+  sem_wait(p->data->die.addr);
   pthread_mutex_lock(&(p->lis_done));
   p->is_done = true;
   pthread_mutex_unlock(&(p->lis_done));
-  sem_post(p->data->die);
+  sem_post(p->data->die.addr);
   return (NULL);
 }
 
@@ -94,13 +92,13 @@ t_errno ft_philo_init(int id, t_data *data, t_philo *p)
   //- for check self strave die
   if (pthread_create(&(p->self_watcher), NULL, &ft_self_watcher, p))
 	{
-    sem_post(data->die);
+    sem_post(data->die.addr);
     return (ERR_PTHREAD_CREATE);
 	}
   // - check if another philo died
   if (pthread_create(&(p->other_watcher), NULL, &ft_other_watcher, p))
   {
-    sem_post(data->die);
+    sem_post(data->die.addr);
     return (ERR_PTHREAD_CREATE);
   }
   return (ERR_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/04 11:09:36 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:44:50 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ time_t				ft_time_now(void);
 void				ft_change_time(time_t *var, pthread_mutex_t *lock);
 void				ft_dely(time_t time);
 t_bool				ft_mutex_cond(int *cond, pthread_mutex_t *lock);
-void				ft_change_status(t_data *data, t_philo *philo,
+void				ft_change_status(t_philo *philo,
 						t_pstatus to);
 char				*ft_itoa(long n);
 char				*ft_strdup(const char *s1);
@@ -137,8 +137,9 @@ void				ft_free_t_sem(t_sem *sema);
 // philos creature
 t_errno ft_philos_creature(t_data *d);
 
-
-// philo life
+// philo init
 t_errno ft_philo_init(int id, t_data *data, t_philo *p);
+// philo life
+t_errno ft_life_cycle(t_philo *p);
 
 #endif

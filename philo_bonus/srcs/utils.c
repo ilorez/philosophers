@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 16:04:51 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:42:40 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,19 @@ void	ft_change_time(time_t *var, pthread_mutex_t *lock)
 }
 
 // change philo->status to "to" status
-void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
+void	ft_change_status(t_philo *philo, t_pstatus to)
 {
 	pthread_mutex_lock(&(philo->lstatus));
 	philo->status = to;
 	pthread_mutex_unlock(&(philo->lstatus));
-	(void)data;
-	// pthread_mutex_lock(&(data->lis_done));
-	// if (!(data->is_done))
-	//{
-	//	pthread_mutex_unlock(&(data->lis_done));
-	ft_print_msg_status(philo);
-	//}
-	// else
-	//	pthread_mutex_unlock(&(data->lis_done));
+	pthread_mutex_lock(&(philo->lis_done));
+	if (!(philo->is_done))
+	{
+		pthread_mutex_unlock(&(philo->lis_done));
+	  ft_print_msg_status(philo);
+	}
+	else
+    pthread_mutex_unlock(&(philo->lis_done));
 	return ;
 }
 
