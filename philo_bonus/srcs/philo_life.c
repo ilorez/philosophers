@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 11:56:56 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/06 15:03:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:07:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,23 @@ t_errno ft_life_cycle(t_philo *p)
 		ft_change_time(&(p->start_time), &(p->lstart_time));
 		ft_change_status(p, EATING);
 		ft_msleep(p->data->teat);
+    printf("[%d]=>done eating\n", p->id);
+    sem_post(p->data->forks.addr);
+    sem_post(p->data->forks.addr);
     sem_post(p->data->request.addr);
-    sem_post(p->data->forks.addr);
-    sem_post(p->data->forks.addr);
     if (ft_mutex_cond((int *)&(p->is_done), &(p->lis_done)))
 			break ;
 		if (p->data->limited && (++(p->eats) >= p->data->max_eats))
+    {
+
+		  pthread_mutex_lock(&(p->lis_done));
+		  p->is_done = true;
+		  pthread_mutex_unlock(&(p->lis_done));
+		  pthread_mutex_lock(&(p->lstatus));
+		  p->status = DONE;
+		  pthread_mutex_unlock(&(p->lstatus));
 			break ;
+    }
     ft_change_status(p, SLEEPING);
 		ft_msleep(p->data->tsleep);
 		ft_change_status(p, THINKING);

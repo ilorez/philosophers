@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:06:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/06 14:44:32 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:46:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_errno ft_philos_creature(t_data *d)
       ft_life_cycle(p);
       // join threds
       ft_wait_thread(p->self_watcher);
-      ft_wait_thread(p->other_watcher);
+      //ft_wait_thread(p->other_watcher);
       // TODO: free philo
       free(p); // free philo data (destroy mutexs, join threads, free)
       exit(0);
