@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 11:56:56 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/05 14:47:25 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:03:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 * 
 *
 */
+// we need to found and idea to make the half go for forks
+// i'm thinking using another sima for that
+// sema size is forks/2 and waiting between take forks and posted after that
 t_errno ft_life_cycle(t_philo *p)
 {
   // dely
@@ -26,19 +29,21 @@ t_errno ft_life_cycle(t_philo *p)
   while (true)
   {
     // get forks using semaphore
+    sem_wait(p->data->request.addr);
     sem_wait(p->data->forks.addr);
 	  ft_print_msg_status(p);
     sem_wait(p->data->forks.addr);
 	  ft_print_msg_status(p);
     // eating
-		ft_change_status(p, EATING);
 		ft_change_time(&(p->start_time), &(p->lstart_time));
+		ft_change_status(p, EATING);
 		ft_msleep(p->data->teat);
+    sem_post(p->data->request.addr);
     sem_post(p->data->forks.addr);
     sem_post(p->data->forks.addr);
     if (ft_mutex_cond((int *)&(p->is_done), &(p->lis_done)))
 			break ;
-		if ((++(p->eats) >= p->data->max_eats && p->data->limited))
+		if (p->data->limited && (++(p->eats) >= p->data->max_eats))
 			break ;
     ft_change_status(p, SLEEPING);
 		ft_msleep(p->data->tsleep);

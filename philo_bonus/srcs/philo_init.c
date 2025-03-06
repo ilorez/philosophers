@@ -6,13 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:52:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/05 14:52:03 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:43:49 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-	pthread_t		self_watcher;
-	pthread_t		other_watcher;
 
 /*
 * dely to start time
@@ -29,7 +27,7 @@ void *ft_self_watcher(void *ptr)
   t_philo *p;
 
   p = (t_philo *)ptr;
-  printf("Hello from slef watcher philo[%d]\n", p->id);
+  //printf("Hello from slef watcher philo[%d]\n", p->id);
   ft_dely(p->start_time);
   while (true)
   {
@@ -42,6 +40,7 @@ void *ft_self_watcher(void *ptr)
       if (p->is_done)
       {
 	  	  pthread_mutex_unlock(&(p->lis_done));
+        pthread_mutex_lock(&(p->lstatus));
         return (NULL);
       }
 	  	p->is_done = true;
@@ -66,12 +65,12 @@ void *ft_other_watcher(void *ptr)
   t_philo *p;
 
   p = (t_philo *)ptr;
-  printf("Hello from other watcher philo[%d]\n", p->id);
+  //printf("Hello from other watcher philo[%d]\n", p->id);
   sem_wait(p->data->die.addr);
+  sem_post(p->data->die.addr);
   pthread_mutex_lock(&(p->lis_done));
   p->is_done = true;
   pthread_mutex_unlock(&(p->lis_done));
-  sem_post(p->data->die.addr);
   return (NULL);
 }
 
