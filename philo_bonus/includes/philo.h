@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/06 15:00:40 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/07 07:40:51 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_philo
 	t_pstatus		status;
 	pthread_t		self_watcher;
 	pthread_t		other_watcher;
-	t_bool			is_done;
+	int			is_done;
 	pthread_mutex_t	lis_done;
 	pthread_mutex_t	lstart_time;
 	pthread_mutex_t	lstatus;

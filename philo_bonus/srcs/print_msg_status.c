@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:21:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/06 14:43:00 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/07 07:54:59 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ void	ft_print_msg_status(t_philo *philo)
 		return ;
   }
 	pthread_mutex_lock(&(philo->lis_done));
-  if (philo->is_done && philo->status != DIE)
+  if (philo->is_done == 2 || (philo->is_done && philo->status != DIE)) 
+  {
+	  pthread_mutex_unlock(&(philo->lis_done));
+	  pthread_mutex_unlock(&(philo->lstatus));
     return ;
+  }
+  if (philo->status == DIE)
+    philo->is_done = 2;
 	pthread_mutex_unlock(&(philo->lis_done));
 	time = ft_time_now() - philo->data->start_time;
   sem_wait(philo->data->write.addr);

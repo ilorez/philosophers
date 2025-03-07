@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:52:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/06 16:07:40 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/07 07:57:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void *ft_self_watcher(void *ptr)
   while (true)
   {
     pthread_mutex_lock(&(p->lstatus));
+    pthread_mutex_lock(&(p->lis_done));
+    if (p->is_done)
+    {
+	  	  pthread_mutex_unlock(&(p->lis_done));
+        pthread_mutex_unlock(&(p->lstatus));
+        return (NULL);
+    }
+	  pthread_mutex_unlock(&(p->lis_done));
 	  pthread_mutex_lock(&(p->lstart_time));
 	  if ((ft_time_now() - p->start_time) > p->data->tdie)
 	  {
@@ -40,10 +48,10 @@ void *ft_self_watcher(void *ptr)
       if (p->is_done)
       {
 	  	  pthread_mutex_unlock(&(p->lis_done));
-        pthread_mutex_lock(&(p->lstatus));
+        pthread_mutex_unlock(&(p->lstatus));
         return (NULL);
       }
-	  	p->is_done = true;
+	  	p->is_done = 1;
 	  	pthread_mutex_unlock(&(p->lis_done));
       sem_post(p->data->die.addr);
 	  	p->status = DIE;
@@ -69,7 +77,7 @@ void *ft_other_watcher(void *ptr)
   sem_wait(p->data->die.addr);
   sem_post(p->data->die.addr);
   pthread_mutex_lock(&(p->lis_done));
-  p->is_done = true;
+  p->is_done = 2;
   pthread_mutex_unlock(&(p->lis_done));
   return (NULL);
 }
