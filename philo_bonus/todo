@@ -1,0 +1,10 @@
+=> the message print after die error (need a solution)
+=> the time to create process is more then 20 mili
+=> the think time for philo is more complicated we need to found a way for calculate it
+=> after fix this error rewrite and organize the code
+=> norminette it
+=> now let's fix other errors
+=> test code with 200 120/5 60 60 should work
+=> test with 199 185 60 60 should also work
+=> may we need to remove the dely time and leave philo start eating one by one and may that
+    fix the error of 3 because i think three should work eather with 120 60 60 in bonus part
