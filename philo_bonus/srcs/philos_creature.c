@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:06:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/07 07:55:01 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/08 11:27:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ t_errno ft_philos_creature(t_data *d)
     }
     else if (d->pid[i] == 0)
     {
+      //printf("Hello! from child %d\n", i+1);
       free(d->pid);
       p = ft_calloc(sizeof(t_philo), 1);
       if (!p)
         exit(ERR_MALLOC_FAIL);// TODO: another stop point here
-      //printf("Hello! from child %d\n", i+1);
       d->err = ft_philo_init(i + 1, d, p);
       if (d->err)
       {

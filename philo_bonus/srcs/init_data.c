@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/06 15:00:42 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/08 11:06:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ t_errno	ft_init_data(t_data *data, int ac, char **av)
   }
 	if (!ft_sem_open(&(data->forks), data->philo_num, &(data->err)))
 		return (data->err);
-	if (!ft_sem_open(&(data->request), data->philo_num/2, &(data->err)))
+	if (!ft_sem_open(&(data->die_gate), 1, &(data->err)))
+		return (data->err);
+	if (!ft_sem_open(&(data->inform), 0, &(data->err)))
 		return (data->err);
 	if (!ft_sem_open(&(data->write), 1, &(data->err)))
 		return (data->err);

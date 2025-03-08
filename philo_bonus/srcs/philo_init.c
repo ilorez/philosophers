@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:52:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/07 07:57:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/08 11:06:21 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,16 @@
 void *ft_self_watcher(void *ptr)
 {
   t_philo *p;
+  int i;
 
   p = (t_philo *)ptr;
-  //printf("Hello from slef watcher philo[%d]\n", p->id);
   ft_dely(p->start_time);
   while (true)
   {
-    pthread_mutex_lock(&(p->lstatus));
     pthread_mutex_lock(&(p->lis_done));
     if (p->is_done)
     {
 	  	  pthread_mutex_unlock(&(p->lis_done));
-        pthread_mutex_unlock(&(p->lstatus));
         return (NULL);
     }
 	  pthread_mutex_unlock(&(p->lis_done));
@@ -44,23 +42,28 @@ void *ft_self_watcher(void *ptr)
 	  if ((ft_time_now() - p->start_time) > p->data->tdie)
 	  {
 	  	pthread_mutex_unlock(&(p->lstart_time));
-	  	pthread_mutex_lock(&(p->lis_done));
+      sem_post(p->data->die.addr);
+      sem_wait(p->data->die_gate.addr);
+      pthread_mutex_lock(&(p->lis_done));
       if (p->is_done)
       {
+        sem_post(p->data->die_gate.addr);
 	  	  pthread_mutex_unlock(&(p->lis_done));
-        pthread_mutex_unlock(&(p->lstatus));
         return (NULL);
       }
 	  	p->is_done = 1;
 	  	pthread_mutex_unlock(&(p->lis_done));
-      sem_post(p->data->die.addr);
+      i = -1;
+      while (++i < p->data->philo_num)
+        sem_wait(p->data->inform.addr);
+      pthread_mutex_lock(&(p->lstatus));
 	  	p->status = DIE;
 	  	pthread_mutex_unlock(&(p->lstatus));
 	  	ft_print_msg_status(p);
+      sem_post(p->data->die_gate.addr);
       break;
 	  }
 	  pthread_mutex_unlock(&(p->lstart_time));
-	  pthread_mutex_unlock(&(p->lstatus));
   }
   return (NULL);
 }
@@ -77,8 +80,9 @@ void *ft_other_watcher(void *ptr)
   sem_wait(p->data->die.addr);
   sem_post(p->data->die.addr);
   pthread_mutex_lock(&(p->lis_done));
-  p->is_done = 2;
+  p->is_done = 1;
   pthread_mutex_unlock(&(p->lis_done));
+  sem_post(p->data->inform.addr);
   return (NULL);
 }
 
@@ -101,13 +105,11 @@ t_errno ft_philo_init(int id, t_data *data, t_philo *p)
 	if (pthread_mutex_init(&(p->lstart_time), NULL) != 0)
 			return (ERR_MUTEX_INIT);
 	p->start_time = data->start_time;
-  //- for check self strave die
   if (pthread_create(&(p->self_watcher), NULL, &ft_self_watcher, p))
 	{
     sem_post(data->die.addr);
     return (ERR_PTHREAD_CREATE);
 	}
-  // - check if another philo died
   if (pthread_create(&(p->other_watcher), NULL, &ft_other_watcher, p))
   {
     sem_post(data->die.addr);

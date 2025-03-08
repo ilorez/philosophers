@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/07 07:40:51 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/08 10:27:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ typedef struct s_data
 	t_sem			forks;
 	t_sem			write;
 	t_sem			die;
-	t_sem			request;
+	t_sem			inform;
+	t_sem			die_gate;
   int *pid;
 }					t_data;
 
