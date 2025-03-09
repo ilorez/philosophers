@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/05 14:42:40 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/09 11:57:52 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,18 @@ void	ft_change_status(t_philo *philo, t_pstatus to)
 }
 
 // return after current time is more then or egal the time got as param
-void	ft_dely(time_t time)
+void	ft_dely(time_t end)
 {
-	while (ft_time_now() < time)
-		continue ;
+  time_t now;
+
+  now = ft_time_now();
+  while (now < end && end - now > 20)
+  {
+    usleep(20000);
+    now = ft_time_now();
+  }
+	while (ft_time_now() < end)
+    usleep(100);
 }
 
 // work for checking the cond if its true after lock it

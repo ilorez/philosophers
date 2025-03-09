@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:06:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/09 10:31:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/09 12:08:35 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_child(t_data *d, int i)
 		ft_philo_exit(p, d, ERR_MALLOC_FAIL);
 	d->err = ft_philo_init(i + 1, d, p);
 	if (d->err)
-		ft_philo_exit(p, d, ERR_SUCCESS);
+		ft_philo_exit(p, d, d->err);
 	ft_life_cycle(p);
 	ft_philo_exit(p, d, ERR_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:40:30 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/08 11:27:42 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/09 12:04:20 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@
  */
 void	ft_msleep(time_t time)
 {
-	time_t	end;
-
-	end = ft_time_now() + time;
-	while (ft_time_now() < end)
-		usleep(100);
+  ft_dely(ft_time_now() + time);
 }
 
 /* we should always calculate think time because
@@ -40,16 +36,13 @@ void	ft_think_time(t_philo *p, t_bool start)
 	time_t	time;
 
 	pthread_mutex_lock(&(p->lstart_time));
-	time = ((p->data->tdie - (ft_time_now() - p->start_time) - p->data->teat)
-			* 2) / 3;
+	time = (p->data->tdie - (ft_time_now() - p->start_time) - p->data->teat) / 2;
 	pthread_mutex_unlock(&(p->lstart_time));
-	if (time < 0)
-		time = 0;
-	if (time < 1 && start)
+  if (time < 0 && start)
 		time = 1;
-	else if (time > 500)
-		time = 500;
-	if (time > p->data->teat)
-		time = p->data->teat;
+  else if (time < 0)
+		time = 0;
+	else if (time > 200)
+		time = 200;
 	ft_msleep(time);
 }
