@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:06:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/09 10:10:11 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/09 10:31:22 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	ft_child(t_data *d, int i)
 {
 	t_philo	*p;
 
-	free(d->pid);
 	p = ft_calloc(sizeof(t_philo), 1);
 	if (!p)
 		ft_philo_exit(p, d, ERR_MALLOC_FAIL);
