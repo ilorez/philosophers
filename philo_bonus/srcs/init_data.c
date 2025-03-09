@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/08 11:06:57 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/09 09:04:54 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,19 @@ static t_errno	ft_get_int(char *str, int *num, t_errno *err);
 
 t_errno	ft_init_data(t_data *data, int ac, char **av)
 {
-	data->err = ft_parsing_params(data, ac, av);
-	if (data->err)
+	if (ft_parsing_params(data, ac, av))
 		return (data->err);
 	if (data->philo_num > MAX_PHILO_NUM || data->philo_num < MIN_PHILO_NUM)
 	{
 		data->err = ERR_PHILO_NUM;
 		return (data->err);
 	}
-  data->pid = ft_calloc(sizeof(int), data->philo_num);
-  if (!(data->pid))
-  {
-    data->err = ERR_MALLOC_FAIL; 
-    return (data->err);
-  }
+	data->pid = ft_calloc(sizeof(int), data->philo_num);
+	if (!(data->pid))
+	{
+		data->err = ERR_MALLOC_FAIL;
+		return (data->err);
+	}
 	if (!ft_sem_open(&(data->forks), data->philo_num, &(data->err)))
 		return (data->err);
 	if (!ft_sem_open(&(data->die_gate), 1, &(data->err)))

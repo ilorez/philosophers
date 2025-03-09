@@ -41,10 +41,10 @@ void	ft_change_status(t_philo *philo, t_pstatus to)
 	if (!(philo->is_done))
 	{
 		pthread_mutex_unlock(&(philo->lis_done));
-	  ft_print_msg_status(philo);
+		ft_print_msg_status(philo);
 	}
 	else
-    pthread_mutex_unlock(&(philo->lis_done));
+		pthread_mutex_unlock(&(philo->lis_done));
 	return ;
 }
 

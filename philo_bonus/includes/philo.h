@@ -24,8 +24,8 @@
 # include <string.h>
 # include <sys/time.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <unistd.h>
-#include <sys/wait.h>
 // #include <signal.h>  /* for kill */
 // #include <sys/stat.h>        /* For mode constants */
 
@@ -76,7 +76,7 @@ typedef struct s_data
 	t_sem			die;
 	t_sem			inform;
 	t_sem			die_gate;
-  int *pid;
+	int				*pid;
 }					t_data;
 
 typedef struct s_philo
@@ -87,7 +87,7 @@ typedef struct s_philo
 	t_pstatus		status;
 	pthread_t		self_watcher;
 	pthread_t		other_watcher;
-	int			is_done;
+	int				is_done;
 	pthread_mutex_t	lis_done;
 	pthread_mutex_t	lstart_time;
 	pthread_mutex_t	lstatus;
@@ -108,8 +108,7 @@ time_t				ft_time_now(void);
 void				ft_change_time(time_t *var, pthread_mutex_t *lock);
 void				ft_dely(time_t time);
 t_bool				ft_mutex_cond(int *cond, pthread_mutex_t *lock);
-void				ft_change_status(t_philo *philo,
-						t_pstatus to);
+void				ft_change_status(t_philo *philo, t_pstatus to);
 char				*ft_itoa(long n);
 char				*ft_strdup(const char *s1);
 size_t				ft_strlen(const char *s);
@@ -137,11 +136,11 @@ t_bool				ft_sem_open(t_sem *sema, int value, t_errno *err);
 void				ft_free_t_sem(t_sem *sema);
 
 // philos creature
-t_errno ft_philos_creature(t_data *d);
+t_errno				ft_philos_creature(t_data *d);
 
 // philo init
-t_errno ft_philo_init(int id, t_data *data, t_philo *p);
+t_errno				ft_philo_init(int id, t_data *data, t_philo *p);
 // philo life
-t_errno ft_life_cycle(t_philo *p);
+t_errno				ft_life_cycle(t_philo *p);
 
 #endif

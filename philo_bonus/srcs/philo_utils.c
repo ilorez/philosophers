@@ -40,14 +40,15 @@ void	ft_think_time(t_philo *p, t_bool start)
 	time_t	time;
 
 	pthread_mutex_lock(&(p->lstart_time));
-	time = ((p->data->tdie - (ft_time_now() - p->start_time) - p->data->teat) * 2) / 3;
+	time = ((p->data->tdie - (ft_time_now() - p->start_time) - p->data->teat)
+			* 2) / 3;
 	pthread_mutex_unlock(&(p->lstart_time));
 	if (time < 0)
 		time = 0;
 	if (time < 1 && start)
 		time = 1;
-  else if (time > 500)
-    time = 500;
+	else if (time > 500)
+		time = 500;
 	if (time > p->data->teat)
 		time = p->data->teat;
 	ft_msleep(time);

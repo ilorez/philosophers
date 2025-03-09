@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL), ERR_MALLOC_FAIL);
 	if (ft_init_data(data, ac, av) != 0)
 		return (ft_free_data(data, data->err));
-  ft_philos_creature(data);
+	ft_philos_creature(data);
 	return (ft_free_data(data, data->err));
 }
 
