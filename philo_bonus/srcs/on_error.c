@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:29:28 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/09 09:43:56 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/10 08:06:49 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ft_print_syntax_error(char *program)
 {
 	printf("./%s <*number_of_philosophers> <*time_to_die> \
     \n\t<*time_to_eat> <time_to_sleep> \
-    \n\t[number_of_times_each_philosopher_must_eat] \n", program);
+    \n\t[number_of_times_each_philosopher_must_eat] \n",
+		program);
 	return (EXIT_FAILURE);
 }

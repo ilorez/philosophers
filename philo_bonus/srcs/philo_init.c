@@ -61,7 +61,7 @@ void	*ft_self_watcher(void *ptr)
 	ft_dely(p->start_time);
 	while (true)
 	{
-    usleep(500);
+		usleep(500);
 		pthread_mutex_lock(&(p->lis_done));
 		if (p->is_done)
 		{

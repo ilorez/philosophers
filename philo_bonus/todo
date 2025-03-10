@@ -6,3 +6,7 @@
 => now let's fix other errors
 => test code with 200 120/5 60 60 should work
 => test with 199 185 60 60 should also work
+
+
+=> [] why it's put it not in order: because the stdio buffering when working with files it's wait until buffer stocked and after that write it using
+write system call that may cose buffer jum in order

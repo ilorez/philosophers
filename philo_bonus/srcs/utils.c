@@ -51,16 +51,16 @@ void	ft_change_status(t_philo *philo, t_pstatus to)
 // return after current time is more then or egal the time got as param
 void	ft_dely(time_t end)
 {
-  time_t now;
+	time_t	now;
 
-  now = ft_time_now();
-  while (now < end && end - now > 20)
-  {
-    usleep(20000);
-    now = ft_time_now();
-  }
+	now = ft_time_now();
+	while (now < end && end - now > 20)
+	{
+		usleep(20000);
+		now = ft_time_now();
+	}
 	while (ft_time_now() < end)
-    usleep(100);
+		usleep(100);
 }
 
 // work for checking the cond if its true after lock it

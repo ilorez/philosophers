@@ -6,7 +6,7 @@
 #    By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 16:06:35 by znajdaou          #+#    #+#              #
-#    Updated: 2025/03/08 11:30:33 by znajdaou         ###   ########.fr        #
+#    Updated: 2025/03/10 07:58:15 by znajdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,5 +54,15 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+run:
+	make re
+	make clean
+	clear
+	./$(NAME) $(arg) > ./result.txt
+copy:
+	copy ./result.txt
+	
+
 
 .PHONY: all clean fclean re

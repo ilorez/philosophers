@@ -23,7 +23,7 @@
  */
 void	ft_msleep(time_t time)
 {
-  ft_dely(ft_time_now() + time);
+	ft_dely(ft_time_now() + time);
 }
 
 /* we should always calculate think time because
@@ -36,11 +36,12 @@ void	ft_think_time(t_philo *p, t_bool start)
 	time_t	time;
 
 	pthread_mutex_lock(&(p->lstart_time));
-	time = (p->data->tdie - (ft_time_now() - p->start_time) - p->data->teat) / 2;
+	time = (p->data->tdie - (ft_time_now() - p->start_time) - p->data->teat)
+		/ 2;
 	pthread_mutex_unlock(&(p->lstart_time));
-  if (time < 0 && start)
+	if (time < 0 && start)
 		time = 1;
-  else if (time < 0)
+	else if (time < 0)
 		time = 0;
 	else if (time > 200)
 		time = 200;
