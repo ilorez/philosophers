@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/11 13:37:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:08:30 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,3 +75,5 @@ t_bool	ft_mutex_cond(int *cond, pthread_mutex_t *lock)
 	pthread_mutex_unlock(lock);
 	return (re);
 }
+
+

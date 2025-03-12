@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/12 15:30:15 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:07:30 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct s_data
 	t_sem			inform;
 	t_sem			die_gate;
 	t_sem			half;
+	t_sem			done;
+	pthread_t		doorman;
   char *status[DONE];
 	int				*pid;
 }					t_data;
@@ -114,6 +116,8 @@ void				ft_change_status(t_philo *philo, t_pstatus to);
 char				*ft_itoa(long n);
 char				*ft_strdup(const char *s1);
 size_t				ft_strlen(const char *s);
+
+void ft_set_msg_status(t_data *data);
 
 // utils folder
 long long			ft_atol(const char *nptr);

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:52:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/12 15:27:43 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:56:24 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	*ft_other_watcher(void *ptr)
 		p->is_done = 1;
 	pthread_mutex_unlock(&(p->lis_done));
 	sem_post(p->data->inform.addr);
+	sem_post(p->data->done.addr);
 	return (NULL);
 }
 

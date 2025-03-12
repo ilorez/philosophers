@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:06:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/12 16:05:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:55:00 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_errno	ft_wait_thread(pthread_t thr);
 static t_errno	ft_philo_exit(t_philo *p, t_data *data, t_errno err);
 static void		ft_child(t_data *d, int i);
+static void		*ft_doorman(void *ptr);
 
 t_errno	ft_philos_creature(t_data *d)
 {
@@ -33,12 +34,27 @@ t_errno	ft_philos_creature(t_data *d)
 		else if (d->pid[i] == 0)
 			ft_child(d, i);
 	}
-  // TODO: create here another thread that look for all other thread and check if all done
-  // create another semaphore to help you do that.
+	if (pthread_create(&(d->doorman), NULL, &ft_doorman, d))
+		d->err = ERR_PTHREAD_CREATE;
+	if (!d->err)
+		d->err = ft_wait_thread(d->doorman);
 	i = -1;
 	while (d->pid[++i])
 		waitpid(d->pid[i], NULL, 0);
 	return (d->err);
+}
+
+static void	*ft_doorman(void *ptr)
+{
+	t_data	*d;
+	int		i;
+
+	d = (t_data *)ptr;
+	i = 0;
+	while (++i <= d->philo_num)
+		sem_wait(d->done.addr);
+	sem_post(d->die.addr);
+	return (NULL);
 }
 
 static void	ft_child(t_data *d, int i)
@@ -57,15 +73,15 @@ static void	ft_child(t_data *d, int i)
 
 static t_errno	ft_philo_exit(t_philo *p, t_data *data, t_errno err)
 {
-  pthread_mutex_lock(&(p->lstatus));
-  if (p->status != DONE)
-    sem_post(data->die.addr);
-  pthread_mutex_unlock(&(p->lstatus));
+	pthread_mutex_lock(&(p->lstatus));
+	if (p->status != DONE)
+		sem_post(data->die.addr);
+	pthread_mutex_unlock(&(p->lstatus));
 	if (p)
 	{
 		ft_wait_thread(p->self_watcher);
 		ft_wait_thread(p->other_watcher);
-    sem_post(data->die.addr);
+		sem_post(data->die.addr);
 	}
 	ft_free_data(data, err);
 	exit(ft_free_philo(p, err));
