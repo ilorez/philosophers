@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/09 11:57:52 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:37:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 // return current time in ms
 time_t	ft_time_now(void)
 {
-	time_t			mills;
 	struct timeval	tv;
+	time_t			mills;
 
 	gettimeofday(&tv, NULL);
 	mills = (time_t)tv.tv_sec * 1000 + (time_t)tv.tv_usec / 1000;
