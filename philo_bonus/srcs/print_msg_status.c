@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:21:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/10 07:57:59 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:29:45 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,14 @@ static void	ft_print_status(t_philo *philo, char *status)
 
 void	ft_print_msg_status(t_philo *philo)
 {
-	char	*status[DONE];
-
-	status[WAITING_FORKS] = "has taken a fork";
-	status[EATING] = "is eating";
-	status[SLEEPING] = "is sleeping";
-	status[THINKING] = "is thinking";
-	status[DIE] = "died";
 	pthread_mutex_lock(&(philo->lstatus));
 	pthread_mutex_lock(&(philo->lis_done));
 	if (philo->is_done == 0 && philo->status >= 0 && philo->status < DIE)
-		ft_print_status(philo, status[philo->status]);
+		ft_print_status(philo, philo->data->status[philo->status]);
 	else if (philo->is_done == 1 && philo->status == DIE)
 	{
 		philo->is_done = 2;
-		ft_print_status(philo, status[philo->status]);
+		ft_print_status(philo, philo->data->status[philo->status]);
 	}
 	pthread_mutex_unlock(&(philo->lis_done));
 	pthread_mutex_unlock(&(philo->lstatus));

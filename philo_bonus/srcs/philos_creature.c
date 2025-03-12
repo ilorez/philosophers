@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 12:06:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/09 12:08:35 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:05:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_errno	ft_philos_creature(t_data *d)
 		else if (d->pid[i] == 0)
 			ft_child(d, i);
 	}
+  // TODO: create here another thread that look for all other thread and check if all done
+  // create another semaphore to help you do that.
 	i = -1;
 	while (d->pid[++i])
 		waitpid(d->pid[i], NULL, 0);
@@ -55,11 +57,15 @@ static void	ft_child(t_data *d, int i)
 
 static t_errno	ft_philo_exit(t_philo *p, t_data *data, t_errno err)
 {
-	sem_post(data->die.addr);
+  pthread_mutex_lock(&(p->lstatus));
+  if (p->status != DONE)
+    sem_post(data->die.addr);
+  pthread_mutex_unlock(&(p->lstatus));
 	if (p)
 	{
 		ft_wait_thread(p->self_watcher);
 		ft_wait_thread(p->other_watcher);
+    sem_post(data->die.addr);
 	}
 	ft_free_data(data, err);
 	exit(ft_free_philo(p, err));

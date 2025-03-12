@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/10 07:18:20 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:30:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_data
 	t_sem			inform;
 	t_sem			die_gate;
 	t_sem			half;
+  char *status[DONE];
 	int				*pid;
 }					t_data;
 
