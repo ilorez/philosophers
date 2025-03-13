@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 08:46:09 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 08:14:36 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ typedef enum s_errno
 	ERR_UNKNOWN,
 	ERR_COUNT
 }			t_errno;
-
-// Errno message structure
-typedef struct s_errno_msg
-{
-	t_errno	code;
-	char	*message;
-}			t_errno_msg;
 
 // Errno function
 void		ft_perror(char *msg, t_errno errno_num);

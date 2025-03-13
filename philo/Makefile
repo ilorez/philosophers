@@ -6,7 +6,7 @@
 #    By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 16:06:35 by znajdaou          #+#    #+#              #
-#    Updated: 2025/03/03 17:32:05 by znajdaou         ###   ########.fr        #
+#    Updated: 2025/03/13 09:18:01 by znajdaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ vpath %.c	utils
 BUILD_DR = ./build/
 NAME =	philo 
 
-FLAGS = -Wall -Wextra -Werror -pthread #-fsanitize=thread #-g #-g3 #
+FLAGS = -Wall -Wextra -Werror -pthread #-fsanitize=thread -g #-g3 #
 INCLUDES_DRS = -I./includes  
 CC = cc
 RM = rm -f

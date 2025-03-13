@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:29:28 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 08:58:08 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:25:19 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_errno	ft_free_data(t_data *data, t_errno err)
 	if (pthread_mutex_destroy(&(data->lfinish_count)) && !err)
 		err = ERR_MUTEX_DESTROY;
 	free(data);
-	if (err)
+	if (err && err != ERR_COUNT)
 		ft_perror(NULL, err);
 	return (err);
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/02 08:48:24 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:40:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,8 @@ static t_errno	ft_get_int(char *str, int *num, t_errno *err);
 
 t_errno	ft_init_data(t_data *data, int ac, char **av)
 {
-	data->err = ft_parsing_params(data, ac, av);
-	if (data->err)
+	if (ft_parsing_params(data, ac, av))
 		return (data->err);
-	if (data->philo_num > MAX_PHILO_NUM || data->philo_num < MIN_PHILO_NUM)
-	{
-		data->err = ERR_PHILO_NUM;
-		return (data->err);
-	}
 	if (pthread_mutex_init(&(data->lis_done), NULL) != 0
 		|| pthread_mutex_init(&(data->lfinish_count), NULL) != 0)
 	{
@@ -42,18 +36,20 @@ t_errno	ft_init_data(t_data *data, int ac, char **av)
 
 static int	ft_parsing_params(t_data *d, int ac, char **av)
 {
-	if (ac == 6)
-	{
-		ft_get_int(av[5], &(d->max_eats), &(d->err));
-		d->limited = true;
-	}
 	ft_get_time_t(av[4], &(d->tsleep), &(d->err));
 	ft_get_time_t(av[3], &(d->teat), &(d->err));
 	ft_get_time_t(av[2], &(d->tdie), &(d->err));
 	ft_get_int(av[1], &(d->philo_num), &(d->err));
-	if (d->err)
-		return (d->err);
-	return (0);
+	if (d->philo_num > MAX_PHILO_NUM || d->philo_num < MIN_PHILO_NUM)
+		d->err = ERR_PHILO_NUM;
+	if (!(d->err) && ac == 6)
+	{
+		ft_get_int(av[5], &(d->max_eats), &(d->err));
+		d->limited = true;
+		if (!(d->err) && d->max_eats == 0)
+			d->err = ERR_COUNT;
+	}
+	return (d->err);
 }
 
 static t_bool	ft_is_valid(char *str)
@@ -81,7 +77,7 @@ static t_errno	ft_get_int(char *str, int *num, t_errno *err)
 		return (*err);
 	}
 	re = ft_atol(str);
-	if (re <= 0 || re > INT_MAX)
+	if (re < 0 || re > INT_MAX)
 	{
 		*err = ERR_ARG_RANGE_INT;
 		return (*err);
