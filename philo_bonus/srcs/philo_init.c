@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:52:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/12 16:56:24 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:05:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*ft_self_watcher(void *ptr)
 	t_philo	*p;
 
 	p = (t_philo *)ptr;
-	ft_dely(p->start_time);
+	ft_dely(p->start_time, &(p->is_done), &(p->lis_done));
 	while (true)
 	{
 		usleep(500);
@@ -89,7 +89,7 @@ void	*ft_other_watcher(void *ptr)
 	t_philo	*p;
 
 	p = (t_philo *)ptr;
-	ft_dely(p->start_time);
+	ft_dely(p->start_time, &(p->is_done), &(p->lis_done));
 	sem_wait(p->data->die.addr);
 	sem_post(p->data->die.addr);
 	pthread_mutex_lock(&(p->lis_done));

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/13 10:18:25 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:09:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void				*ft_philo_life_cycle(void *ptr);
 // utils
 time_t				ft_time_now(void);
 void				ft_change_time(time_t *var, pthread_mutex_t *lock);
-void				ft_dely(time_t time);
+void				ft_dely(time_t end, int *check, pthread_mutex_t *lock);
 t_bool				ft_mutex_cond(int *cond, pthread_mutex_t *lock);
 void				ft_change_status(t_data *data, t_philo *philo,
 						t_pstatus to);
@@ -123,7 +123,7 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_print_msg_status(t_philo *philo);
 
 // philo utils
-void				ft_msleep(time_t time);
+void				ft_msleep(time_t time, int *check, pthread_mutex_t *lock);
 void				ft_think_time(t_philo *p, t_bool start);
 
 #endif

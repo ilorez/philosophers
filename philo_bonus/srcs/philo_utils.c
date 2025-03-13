@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:40:30 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/09 12:04:20 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:06:31 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
  * the time that usleep adds is less than 100 microsec
  * which make no effect
  */
-void	ft_msleep(time_t time)
+void	ft_msleep(time_t time, int *check, pthread_mutex_t *lock)
 {
-	ft_dely(ft_time_now() + time);
+	ft_dely(ft_time_now() + time, check, lock);
 }
 
 /* we should always calculate think time because
@@ -45,5 +45,5 @@ void	ft_think_time(t_philo *p, t_bool start)
 		time = 0;
 	else if (time > 200)
 		time = 200;
-	ft_msleep(time);
+	ft_msleep(time, &(p->is_done), &(p->lis_done));
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 15:18:31 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/28 15:23:23 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:15:45 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_errno	ft_watcher(t_data *data, t_philo **philos)
 	int	re;
 
 	id = 0;
-	ft_dely(data->start_time);
+	ft_dely(data->start_time, &(data->is_done), &(data->lis_done));
 	while (true)
 	{
 		if (id == data->philo_num)

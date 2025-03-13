@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/13 10:10:02 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:57:05 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ t_errno				ft_free_philo(t_philo *philo, t_errno err);
 // utils
 time_t				ft_time_now(void);
 void				ft_change_time(time_t *var, pthread_mutex_t *lock);
-void				ft_dely(time_t time);
+// void				ft_dely(time_t time);
+void				ft_dely(time_t end, int *check, pthread_mutex_t *lock);
 t_bool				ft_mutex_cond(int *cond, pthread_mutex_t *lock);
 void				ft_change_status(t_philo *philo, t_pstatus to);
 char				*ft_itoa(long n);
@@ -131,7 +132,7 @@ void				ft_print_msg_status(t_philo *philo);
 void				ft_set_msg_status(t_data *data);
 
 // philo utils
-void				ft_msleep(time_t time);
+void				ft_msleep(time_t time, int *check, pthread_mutex_t *lock);
 void				ft_think_time(t_philo *p, t_bool start);
 
 // sema_utitls

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:57:19 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/02/28 14:57:13 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:15:09 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,20 @@ void	ft_change_status(t_data *data, t_philo *philo, t_pstatus to)
 }
 
 // return after current time is more then or egal the time got as param
-void	ft_dely(time_t time)
+void	ft_dely(time_t end, int *check, pthread_mutex_t *lock)
 {
-	while (ft_time_now() < time)
-		continue ;
+	time_t	now;
+
+	now = ft_time_now();
+	while (now < end && end - now > 20)
+	{
+		usleep(20000);
+		if (ft_mutex_cond(check, lock))
+			return ;
+		now = ft_time_now();
+	}
+	while (ft_time_now() < end)
+		usleep(100);
 }
 
 // work for checking the cond if its true after lock it
