@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/13 08:19:36 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:02:32 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	_ft_create_err_list(char *lst[ERR_COUNT])
 	err_msgs[ERR_PTHREAD_JOIN] = "pthread join failed\n";
 	err_msgs[ERR_PTHREAD_CREATE] = "pthread create failed\n";
 	err_msgs[ERR_MUTEX_DESTROY] = "pthread mutex destroy failed\n";
-	int (i), (j), (hello) = 0;
 	err_msgs[ERR_ARG_RANGE_INT] = "invalid argument:\n\t \
 make sure that <number of philos> and <max eat time> \
 is between [1, INT_MAX]\n";
