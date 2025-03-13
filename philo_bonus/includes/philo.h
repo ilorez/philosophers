@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/12 17:07:30 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 06:34:43 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_data
 	t_sem			half;
 	t_sem			done;
 	pthread_t		doorman;
-  char *status[DONE];
+	char			*status[DONE];
 	int				*pid;
 }					t_data;
 
@@ -117,8 +117,6 @@ char				*ft_itoa(long n);
 char				*ft_strdup(const char *s1);
 size_t				ft_strlen(const char *s);
 
-void ft_set_msg_status(t_data *data);
-
 // utils folder
 long long			ft_atol(const char *nptr);
 void				*ft_calloc(size_t count, size_t size);
@@ -131,6 +129,7 @@ void				ft_putstr_fd(char *s, int fd);
 
 // print msg status
 void				ft_print_msg_status(t_philo *philo);
+void				ft_set_msg_status(t_data *data);
 
 // philo utils
 void				ft_msleep(time_t time);

@@ -75,5 +75,3 @@ t_bool	ft_mutex_cond(int *cond, pthread_mutex_t *lock)
 	pthread_mutex_unlock(lock);
 	return (re);
 }
-
-
