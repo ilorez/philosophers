@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/13 09:40:57 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:17:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static int	ft_parsing_params(t_data *d, int ac, char **av)
 	ft_get_time_t(av[3], &(d->teat), &(d->err));
 	ft_get_time_t(av[2], &(d->tdie), &(d->err));
 	ft_get_int(av[1], &(d->philo_num), &(d->err));
-	if (d->philo_num > MAX_PHILO_NUM || d->philo_num < MIN_PHILO_NUM)
+	if (d->philo_num > MAX_PHILO_NUM)
 		d->err = ERR_PHILO_NUM;
+	if (d->philo_num == 0)
+		d->err = ERR_COUNT;
 	if (!(d->err) && ac == 6)
 	{
 		ft_get_int(av[5], &(d->max_eats), &(d->err));

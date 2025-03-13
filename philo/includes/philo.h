@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:38:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/03/13 09:34:33 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:18:25 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <unistd.h>
 
 # define MAX_PHILO_NUM 200
-# define MIN_PHILO_NUM 1
 # define MAX_ARG_RANGE 2147483649
 // it's should always be between [0,
 // long long[  NOTE: long long not included
